@@ -2,5 +2,6 @@
 {
     public class UpdatePostRequest
     {
+        public string Content { get; set; }
     }
 }
