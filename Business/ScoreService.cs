@@ -51,5 +51,20 @@ namespace Mulligan.API.Business
 
             return scoresDTO;
         }
+
+        public bool DeleteScore(Guid id)
+        {
+            var existingScore = _dbContext.Scores.Find(id);
+
+            if (existingScore != null)
+            {
+                _dbContext.Scores.Remove(existingScore);
+                _dbContext.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
