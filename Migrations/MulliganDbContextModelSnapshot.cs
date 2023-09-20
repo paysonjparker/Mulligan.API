@@ -71,8 +71,6 @@ namespace Mulligan.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Posts");
                 });
 
@@ -91,7 +89,7 @@ namespace Mulligan.API.Migrations
                     b.Property<int>("Total")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -134,24 +132,11 @@ namespace Mulligan.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Mulligan.API.Models.DomainModels.Post", b =>
-                {
-                    b.HasOne("Mulligan.API.Models.DomainModels.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-                });
-
             modelBuilder.Entity("Mulligan.API.Models.DomainModels.Score", b =>
                 {
                     b.HasOne("Mulligan.API.Models.DomainModels.User", null)
                         .WithMany("Scores")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Mulligan.API.Models.DomainModels.User", b =>

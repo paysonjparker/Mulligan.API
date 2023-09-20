@@ -1,4 +1,6 @@
 ﻿using Mulligan.API.Data;
+using Mulligan.API.Models.DataTransferObjects.UserDto;
+using Mulligan.API.Models.DomainModels;
 
 namespace Mulligan.API.Business
 {
@@ -10,5 +12,7 @@ namespace Mulligan.API.Business
         {
             this._dbContext = dbContext;
         }
+        
+
     }
 }

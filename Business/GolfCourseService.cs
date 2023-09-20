@@ -137,5 +137,31 @@ namespace Mulligan.API.Business
 
             return false;
         }
+
+        /// <summary>
+        /// Updates an exisitng golf course in the database
+        /// </summary>
+        /// <param name="id">ID number of the golf course being updated</param>
+        /// <param name="updateGolfCourseRequest">Update golf course request</param>
+        /// <returns>The newly updated golf course object</returns>
+        public GolfCourse UpdateGolfCourse(Guid id, UpdateGolfCourseRequest updateGolfCourseRequest)
+        {
+            var existingGolfCourse = _dbContext.GolfCourses.Find(id);
+
+            if (existingGolfCourse != null)
+            {
+                existingGolfCourse.Name = updateGolfCourseRequest.Name;
+                existingGolfCourse.Location = updateGolfCourseRequest.Location;
+                existingGolfCourse.SlopeRating = updateGolfCourseRequest.SlopeRating;
+                existingGolfCourse.CourseRating = updateGolfCourseRequest.CourseRating;
+                existingGolfCourse.Yardage = updateGolfCourseRequest.Yardage;
+                existingGolfCourse.Par = updateGolfCourseRequest.Par;
+
+                _dbContext.SaveChanges();
+                return existingGolfCourse;
+            }
+
+            return null;
+        }
     }
 }

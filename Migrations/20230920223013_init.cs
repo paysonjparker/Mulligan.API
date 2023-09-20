@@ -28,6 +28,8 @@ namespace Mulligan.API.Migrations
                     table.PrimaryKey("PK_GolfCourses", x => x.Id);
                 });
 
+            
+
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -47,8 +49,7 @@ namespace Mulligan.API.Migrations
                         name: "FK_Users_GolfCourses_GolfCourseId",
                         column: x => x.GolfCourseId,
                         principalTable: "GolfCourses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -67,8 +68,7 @@ namespace Mulligan.API.Migrations
                         name: "FK_Posts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -79,23 +79,22 @@ namespace Mulligan.API.Migrations
                     Total = table.Column<int>(type: "int", nullable: false),
                     Differential = table.Column<float>(type: "real", nullable: false),
                     GolfCourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Scores", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Scores_GolfCourses_GolfCourseId",
+                        column: x => x.GolfCourseId,
+                        principalTable: "GolfCourses",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_Scores_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Posts_UserId",
-                table: "Posts",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Scores_UserId",

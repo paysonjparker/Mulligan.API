@@ -2,8 +2,6 @@
 {
     public class AddPostRequest
     {
-        public string Content { get; set; }
-        public DateTime Timestamp { get; set; }
-        public Guid UserId { get; set; }
+       
     }
 }
