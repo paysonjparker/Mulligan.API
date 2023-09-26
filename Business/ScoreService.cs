@@ -26,6 +26,7 @@ namespace Mulligan.API.Business
                 Total = addScoreRequest.Total,
                 Differential = CalculateScoreDifferential(addScoreRequest.Total, addScoreRequest.GolfCourseId),
                 UserId = addScoreRequest.UserId,
+                GolfCourseId = addScoreRequest.GolfCourseId,
             };
 
             var userUpdateRequest = new UpdateUserRequest()
@@ -33,7 +34,7 @@ namespace Mulligan.API.Business
                 Password = user.Password,
                 Name = user.Name,
                 Email = user.Email,
-                HandicapIndex = CalculateHandicapIndex(user.Id),
+                HandicapIndex = (float)Math.Round(CalculateHandicapIndex(user.Id), 1),
                 GolfCourseId = user.GolfCourseId,
             };
 
@@ -88,6 +89,8 @@ namespace Mulligan.API.Business
         public float CalculateHandicapIndex(Guid userId)
         {
             var scoreList = GetAllScoresByUser(userId);
+
+            scoreList.Reverse();
 
             if (scoreList.Count > 20)
             {
@@ -163,9 +166,12 @@ namespace Mulligan.API.Business
 
             var golfCourse = golfCourseService.GetGolfCourseById(golfCourseId);
 
-            var differential = ((113 / golfCourse.SlopeRating) * (scoreTotal - golfCourse.CourseRating));
+            float slopeRating = golfCourse.SlopeRating;
+            float courseRating = golfCourse.CourseRating;
+
+            var differential = ((113 / slopeRating) * (scoreTotal - courseRating));
             
-            return differential;
+            return (float)Math.Round(differential, 1);
         }
     }
 }
