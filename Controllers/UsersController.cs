@@ -26,5 +26,33 @@ namespace Mulligan.API.Controllers
 
             return Ok(user);
         }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public IActionResult UpdateUser(Guid id, UpdateUserRequest updateUserRequest)
+        {
+            var existingUser = _userService.UpdateUser(id, updateUserRequest);
+
+            if (existingUser != null)
+            {
+                return Ok(existingUser);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public IActionResult DeleteUser(Guid id)
+        {
+            var existingUser = _userService.DeleteUser(id);
+
+            if (existingUser != false)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
     }
 }
