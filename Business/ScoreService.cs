@@ -1,5 +1,6 @@
 ﻿using Mulligan.API.Data;
 using Mulligan.API.Models.DataTransferObjects.ScoreDto;
+using Mulligan.API.Models.DataTransferObjects.UserDto;
 using Mulligan.API.Models.DomainModels;
 
 namespace Mulligan.API.Business
@@ -11,6 +12,38 @@ namespace Mulligan.API.Business
         public ScoreService(MulliganDbContext dbContext)
         {
             this._dbContext = dbContext;
+        }
+
+        public Score AddScore(AddScoreRequest addScoreRequest)
+        {
+
+            var userService = new UserService(_dbContext);
+
+            var user = userService.GetUserById(addScoreRequest.UserId);
+
+            var score = new Score
+            {
+                Total = addScoreRequest.Total,
+                Differential = CalculateScoreDifferential(addScoreRequest.Total, addScoreRequest.GolfCourseId),
+                UserId = addScoreRequest.UserId,
+            };
+
+            var userUpdateRequest = new UpdateUserRequest()
+            {
+                Password = user.Password,
+                Name = user.Name,
+                Email = user.Email,
+                HandicapIndex = CalculateHandicapIndex(user.Id),
+                GolfCourseId = user.GolfCourseId,
+            };
+
+            //Update user handicap index based on new score
+            userService.UpdateUser(addScoreRequest.UserId, userUpdateRequest);
+
+            _dbContext.Scores.Add(score);
+            _dbContext.SaveChanges();
+
+            return score;
         }
 
         public List<Score> GetAllScoresByUser(Guid userId)

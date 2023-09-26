@@ -42,6 +42,57 @@ namespace Mulligan.API.Business
             return user;
         }
 
+        public List<User> GetAllUsers()
+        {
+            var scoreService = new ScoreService(_dbContext);
+
+            var users = _dbContext.Users.ToList();
+
+            var golfersDto = new List<User>();
+            foreach (var user in users)
+            {
+                golfersDto.Add(new User
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Password = user.Password,
+                    HandicapIndex = user.HandicapIndex,
+                    GolfCourseId = user.GolfCourseId,
+                    Scores = scoreService.GetAllScoresByUser(user.Id),
+                });
+            }
+
+            return golfersDto;
+        }
+
+        public User GetUserById(Guid id)
+        {
+            var scoreService = new ScoreService(_dbContext);
+
+            var user = _dbContext.Users.Find(id);
+
+            if (user != null)
+            {
+                var userDto = new User
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Password = user.Password,
+                    HandicapIndex = user.HandicapIndex,
+                    GolfCourseId = user.GolfCourseId,
+                    Scores = scoreService.GetAllScoresByUser(user.Id),
+                };
+
+                return userDto;
+            }
+
+            return null;
+        }
+
         public User UpdateUser(Guid id, UpdateUserRequest updateUserRequest)
         {
             var existingUser = _dbContext.Users.Find(id);

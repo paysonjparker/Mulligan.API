@@ -19,6 +19,30 @@ namespace Mulligan.API.Controllers
             this._userService = new UserService(dbContext);
         }
 
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            var users = _userService.GetAllUsers();
+
+            users = users.OrderBy(x => x.Name).ToList();
+
+            return Ok(users);
+        }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public IActionResult GetUserById(Guid id)
+        {
+            var user = _userService.GetUserById(id);
+
+            if (user != null)
+            {
+                return Ok(user);
+            }
+
+            return BadRequest();
+        }
+
         [HttpPost]
         public IActionResult AddUser(AddUserRequest addUserRequest)
         {
