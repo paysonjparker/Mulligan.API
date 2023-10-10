@@ -100,6 +100,11 @@ namespace Mulligan.API.Migrations
                 name: "IX_Scores_UserId",
                 table: "Scores",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_UserId",
+                table: "Posts",
+                column: "UserId");
         }
 
         /// <inheritdoc />
