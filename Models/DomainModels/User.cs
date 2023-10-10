@@ -8,6 +8,7 @@
         public string Name { get; set; }
         public string Email { get; set; }
         public float HandicapIndex { get; set; }
+        public string HomeCourseName { get; set; }
         public ICollection<Score> Scores { get; set; }
         public ICollection<Post> Posts { get; set; }
         public Guid GolfCourseId { get; set; }

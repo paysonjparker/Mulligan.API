@@ -17,14 +17,16 @@ namespace Mulligan.API.Business
 
         public User AddUser(AddUserRequest addUserRequest)
         {
-           /* byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); // divide by 8 to convert bits to bytes
-            Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                            password: addUserRequest.Password,
-                            salt: salt,
-                            prf: KeyDerivationPrf.HMACSHA256,
-                            iterationCount: 100000,
-                            numBytesRequested: 256 / 8))*/
+            /* byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); // divide by 8 to convert bits to bytes
+             Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                             password: addUserRequest.Password,
+                             salt: salt,
+                             prf: KeyDerivationPrf.HMACSHA256,
+                             iterationCount: 100000,
+                             numBytesRequested: 256 / 8))*/
 
+            var golfCourseService = new GolfCourseService(_dbContext);
+            var homeCourse = golfCourseService.GetGolfCourseById(addUserRequest.GolfCourseId);
 
             var user = new User
             {
@@ -33,6 +35,7 @@ namespace Mulligan.API.Business
                 Name = addUserRequest.Name,
                 Email = addUserRequest.Email,
                 HandicapIndex = 0,
+                HomeCourseName = homeCourse.Name,
                 GolfCourseId = addUserRequest.GolfCourseId,
             };
 
@@ -52,6 +55,7 @@ namespace Mulligan.API.Business
             var golfersDto = new List<User>();
             foreach (var user in users)
             {
+
                 golfersDto.Add(new User
                 {
                     Id = user.Id,
@@ -60,6 +64,7 @@ namespace Mulligan.API.Business
                     Email = user.Email,
                     Password = user.Password,
                     HandicapIndex = user.HandicapIndex,
+                    HomeCourseName = user.HomeCourseName,
                     GolfCourseId = user.GolfCourseId,
                     Scores = scoreService.GetAllScoresByUser(user.Id),
                     Posts = postService.GetAllPostsByUser(user.Id),
@@ -86,6 +91,7 @@ namespace Mulligan.API.Business
                     Email = user.Email,
                     Password = user.Password,
                     HandicapIndex = user.HandicapIndex,
+                    HomeCourseName = user.HomeCourseName,
                     GolfCourseId = user.GolfCourseId,
                     Scores = scoreService.GetAllScoresByUser(user.Id),
                     Posts = postService.GetAllPostsByUser(user.Id),
@@ -99,6 +105,9 @@ namespace Mulligan.API.Business
 
         public User UpdateUser(Guid id, UpdateUserRequest updateUserRequest)
         {
+
+            var golfCourseService = new GolfCourseService(_dbContext);
+
             var existingUser = _dbContext.Users.Find(id);
 
             if (existingUser != null)
@@ -107,6 +116,7 @@ namespace Mulligan.API.Business
                 existingUser.Name = updateUserRequest.Name;
                 existingUser.Email = updateUserRequest.Email;
                 existingUser.HandicapIndex = updateUserRequest.HandicapIndex;
+                existingUser.HomeCourseName = golfCourseService.GetGolfCourseById(updateUserRequest.GolfCourseId).Name;
                 existingUser.GolfCourseId= updateUserRequest.GolfCourseId;
 
                 _dbContext.SaveChanges();

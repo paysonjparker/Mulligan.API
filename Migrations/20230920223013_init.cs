@@ -40,6 +40,7 @@ namespace Mulligan.API.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HandicapIndex = table.Column<float>(type: "real", nullable: false),
+                    HomeCourseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GolfCourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
