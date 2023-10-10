@@ -45,6 +45,7 @@ namespace Mulligan.API.Business
         public List<User> GetAllUsers()
         {
             var scoreService = new ScoreService(_dbContext);
+            var postService = new PostService(_dbContext);
 
             var users = _dbContext.Users.ToList();
 
@@ -61,6 +62,7 @@ namespace Mulligan.API.Business
                     HandicapIndex = user.HandicapIndex,
                     GolfCourseId = user.GolfCourseId,
                     Scores = scoreService.GetAllScoresByUser(user.Id),
+                    Posts = postService.GetAllPostsByUser(user.Id),
                 });
             }
 
@@ -70,6 +72,7 @@ namespace Mulligan.API.Business
         public User GetUserById(Guid id)
         {
             var scoreService = new ScoreService(_dbContext);
+            var postService = new PostService(_dbContext);
 
             var user = _dbContext.Users.Find(id);
 
@@ -85,6 +88,7 @@ namespace Mulligan.API.Business
                     HandicapIndex = user.HandicapIndex,
                     GolfCourseId = user.GolfCourseId,
                     Scores = scoreService.GetAllScoresByUser(user.Id),
+                    Posts = postService.GetAllPostsByUser(user.Id),
                 };
 
                 return userDto;
