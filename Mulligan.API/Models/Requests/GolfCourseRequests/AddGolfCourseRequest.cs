@@ -7,14 +7,17 @@ namespace Mulligan.API.Models.Requests.GolfCourseRequests
         [Required]
         public string Name { get; set; }
         [Required]
-        public string Location { get; set; }
+        public string City { get; set; }
+        public string? Subdivision { get; set; }
         [Required]
-        public int SlopeRating { get; set; }
-        [Required]
-        public float CourseRating { get; set; }
+        public string Country { get; set; }
         [Required]
         public int Yardage { get; set; }
         [Required]
         public int Par { get; set; }
+        [Required]
+        public int SlopeRating { get; set; }
+        [Required]
+        public float CourseRating { get; set; }
     }
 }

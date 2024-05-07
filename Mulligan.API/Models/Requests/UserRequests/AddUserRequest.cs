@@ -1,12 +1,18 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace Mulligan.API.Models.Requests.UserRequests
 {
     public class AddUserRequest
     {
+        [Required]
         public string Username { get; set; }
+        [Required]
         public string Password { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public Guid GolfCourseId { get; set; }
+        [Required]
+        public string FullName { get; set; }
+        [Required]
+        public string EmailAddress { get; set; }
+        public Guid? GolfCourseId { get; set; }
     }
 }
