@@ -14,79 +14,79 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             this._dbContext = dbContext;
         }
 
-        public UserDomain AddUser(AddUserRequest addUserRequest)
+        public User AddUser(AddUserRequest addUserRequest)
         {
-            var homeCourse = _dbContext.GOLF_COURSE.Find(addUserRequest.GolfCourseId);
+            var homeCourse = _dbContext.GolfCourse.Find(addUserRequest.GolfCourseId);
 
-            var user = new UserDomain
+            var user = new User
             {
-                USERNAME = addUserRequest.Username,
-                PASSWORD = addUserRequest.Password,
-                FULL_NAME = addUserRequest.FullName,
-                EMAIL_ADDRESS = addUserRequest.EmailAddress,
-                HANDICAP_INDEX = 0,
-                HOME_COURSE_NAME = homeCourse.NAME ?? null,
-                GOLF_COURSE_ID = addUserRequest.GolfCourseId ?? null,
+                Username = addUserRequest.Username,
+                Password = addUserRequest.Password,
+                FullName = addUserRequest.FullName,
+                EmailAddress = addUserRequest.EmailAddress,
+                HandicapIndex = 0,
+                HomeCourseName = homeCourse.Name ?? null,
+                GolfCourseId = addUserRequest.GolfCourseId ?? null,
             };
 
-            _dbContext.USER.Add(user);
+            _dbContext.User.Add(user);
             _dbContext.SaveChanges();
 
             return user;
         }
 
-        public List<UserDomain> GetAllUsers()
+        public List<User> GetAllUsers()
         {
-            var users = _dbContext.USER.ToList();
+            var users = _dbContext.User.ToList();
 
             foreach (var user in users)
             {
-                user.POSTS = _dbContext.POST.ToList().Where(post => post.USER_ID.Equals(user.USER_ID)).ToList();
-                user.SCORES = _dbContext.SCORE.ToList().Where(score => score.USER_ID.Equals(user.USER_ID)).ToList();
+                user.Posts = _dbContext.Post.ToList().Where(post => post.UserId.Equals(user.Id)).ToList();
+                user.Scores = _dbContext.Score.ToList().Where(score => score.UserId.Equals(user.Id)).ToList();
             }
 
             return users;
         }
 
-        public List<UserDomain> GetAllUsersByGolfCourse(Guid golfCourseId)
+        public List<User> GetAllUsersByGolfCourse(Guid golfCourseId)
         {
-            var users = _dbContext.USER.Where(user => user.GOLF_COURSE_ID.Equals(golfCourseId)).ToList();
+            var users = _dbContext.User.Where(user => user.GolfCourseId.Equals(golfCourseId)).ToList();
 
             foreach (var user in users)
             {
-                user.POSTS = _dbContext.POST.ToList().Where(post => post.USER_ID.Equals(user.USER_ID)).ToList();
-                user.SCORES = _dbContext.SCORE.ToList().Where(score => score.USER_ID.Equals(user.USER_ID)).ToList();
+                user.Posts = _dbContext.Post.ToList().Where(post => post.UserId.Equals(user.Id)).ToList();
+                user.Scores = _dbContext.Score.ToList().Where(score => score.UserId.Equals(user.Id)).ToList();
             }
 
             return users;
         }
 
-        public UserDomain GetUserById(Guid id)
+        public User GetUserById(Guid id)
         {
-            var user = _dbContext.USER.Find(id);
+            var user = _dbContext.User.Find(id);
 
             if (user != null)
             {                
-                user.POSTS = _dbContext.POST.ToList().Where(post => post.USER_ID.Equals(user.USER_ID)).ToList();
-                user.SCORES = _dbContext.SCORE.ToList().Where(score => score.USER_ID.Equals(user.USER_ID)).ToList();
+                user.Posts = _dbContext.Post.ToList().Where(post => post.UserId.Equals(user.Id)).ToList();
+                user.Scores = _dbContext.Score.ToList().Where(score => score.UserId.Equals(user.Id)).ToList();
                 return user;
             }
 
             return null;
         }
 
-        public UserDomain UpdateUser(Guid id, UpdateUserRequest updateUserRequest)
+        public User UpdateUser(Guid id, UpdateUserRequest updateUserRequest)
         {
-            var user = _dbContext.USER.Find(id);
-            var homeCourse = _dbContext.GOLF_COURSE.Find(updateUserRequest.GolfCourseId);
+            var user = _dbContext.User.Find(id);
+            var homeCourse = _dbContext.GolfCourse.Find(updateUserRequest.GolfCourseId);
 
             if (user != null)
             {
-                user.PASSWORD = updateUserRequest.Password ?? user.PASSWORD;
-                user.FULL_NAME = updateUserRequest.FullName;
-                user.EMAIL_ADDRESS = updateUserRequest.EmailAddress;
-                user.HOME_COURSE_NAME = homeCourse.NAME ?? null;
-                user.GOLF_COURSE_ID = updateUserRequest.GolfCourseId ?? null;
+                user.Password = updateUserRequest.Password ?? user.Password;
+                user.FullName = updateUserRequest.FullName;
+                user.EmailAddress = updateUserRequest.EmailAddress;
+                user.HomeCourseName = homeCourse.Name ?? null;
+                user.GolfCourseId = updateUserRequest.GolfCourseId ?? null;
 
                 _dbContext.SaveChanges();
                 return user;
@@ -97,11 +97,11 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
 
         public bool DeleteUser(Guid id)
         {
-            var user = _dbContext.USER.Find(id);
+            var user = _dbContext.User.Find(id);
 
             if (user != null)
             {
-                _dbContext.USER.Remove(user);
+                _dbContext.User.Remove(user);
                 _dbContext.SaveChanges();
 
                 return true;

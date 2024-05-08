@@ -5,9 +5,9 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
 {
     public interface IScoreRepoClient
     {
-        public ScoreDomain AddScore(AddScoreRequest addScoreRequest);
-        public List<ScoreDomain> GetAllScoresByUser(Guid userId);
-        public List<ScoreDomain> GetAllScoresByGolfCourse(Guid golfCourseId);
+        public Score AddScore(AddScoreRequest addScoreRequest);
+        public List<Score> GetAllScoresByUser(Guid userId);
+        public List<Score> GetAllScoresByGolfCourse(Guid golfCourseId);
         public bool DeleteScore(Guid id);
         public float CalculateHandicapIndex(Guid userId);
         public float CalculateScoreDifferential(int scoreTotal, Guid golfCourseId);

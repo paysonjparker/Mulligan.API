@@ -34,7 +34,7 @@ namespace Mulligan.API.RepositoryServices
             return _scoreRepoClient.DeleteScore(scoreId);
         }
 
-        private ScoreResponse ConvertScore(ScoreDomain scoreDomain)
+        private ScoreResponse ConvertScore(Score scoreDomain)
         {
             if (scoreDomain == null)
             {
@@ -42,18 +42,18 @@ namespace Mulligan.API.RepositoryServices
             }
             ScoreResponse scoreResponse = new ScoreResponse
             {
-                ScoreId = scoreDomain.SCORE_ID,
-                Differential = scoreDomain.DIFFERENTIAL,
-                Total = scoreDomain.TOTAL,
-                CreatedDate = scoreDomain.CREATED_DATE,
-                UserId = scoreDomain.USER_ID,
-                GolfCourseId = scoreDomain.GOLF_COURSE_ID,
+                ScoreId = scoreDomain.Id,
+                Differential = scoreDomain.Differential,
+                Total = scoreDomain.Total,
+                CreatedDate = scoreDomain.CreatedDate,
+                UserId = scoreDomain.UserId,
+                GolfCourseId = scoreDomain.GolfCourseId,
             };
 
             return scoreResponse;
         }
 
-        private List<ScoreResponse> ConvertScores(IEnumerable<ScoreDomain> scoreDomains)
+        private List<ScoreResponse> ConvertScores(IEnumerable<Score> scoreDomains)
         {
             if (scoreDomains == null)
             {

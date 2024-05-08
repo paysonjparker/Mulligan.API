@@ -9,9 +9,9 @@ namespace Mulligan.API.Data
         {
 
         }
-        public DbSet<UserDomain> USER { get; set; }
-        public DbSet<ScoreDomain> SCORE { get; set; }
-        public DbSet<GolfCourseDomain> GOLF_COURSE { get; set; }
-        public DbSet<PostDomain> POST { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Score> Score { get; set; }
+        public DbSet<GolfCourse> GolfCourse { get; set; }
+        public DbSet<Post> Post { get; set; }
     }
 }

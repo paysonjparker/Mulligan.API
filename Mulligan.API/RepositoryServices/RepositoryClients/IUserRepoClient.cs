@@ -5,11 +5,11 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
 {
     public interface IUserRepoClient
     {
-        public UserDomain AddUser(AddUserRequest addUserRequest);
-        public List<UserDomain> GetAllUsers();
-        public List<UserDomain> GetAllUsersByGolfCourse(Guid golfCourseId);
-        public UserDomain GetUserById(Guid id);
-        public UserDomain UpdateUser(Guid id, UpdateUserRequest updateUserRequest);
+        public User AddUser(AddUserRequest addUserRequest);
+        public List<User> GetAllUsers();
+        public List<User> GetAllUsersByGolfCourse(Guid golfCourseId);
+        public User GetUserById(Guid id);
+        public User UpdateUser(Guid id, UpdateUserRequest updateUserRequest);
         public bool DeleteUser(Guid id);
     }
 }

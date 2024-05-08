@@ -45,7 +45,7 @@ namespace Mulligan.API.RepositoryServices
             return _userRepoClient.DeleteUser(userId);
         }
 
-        private UserResponse ConvertUser(UserDomain userDomain)
+        private UserResponse ConvertUser(User userDomain)
         {
             if (userDomain == null)
             {
@@ -53,22 +53,22 @@ namespace Mulligan.API.RepositoryServices
             }
             UserResponse userResponse = new UserResponse
             {
-                UserId = userDomain.USER_ID,
-                Username = userDomain.USERNAME,
-                Password = userDomain.PASSWORD,
-                FullName = userDomain.FULL_NAME,
-                EmailAddress = userDomain.EMAIL_ADDRESS,
-                HandicapIndex = userDomain.HANDICAP_INDEX,
-                HomeCourseName = userDomain.HOME_COURSE_NAME,
-                Scores = userDomain.SCORES,
-                Posts = userDomain.POSTS,
-                GolfCourseId = userDomain.GOLF_COURSE_ID,
+                UserId = userDomain.Id,
+                Username = userDomain.Username,
+                Password = userDomain.Password,
+                FullName = userDomain.FullName,
+                EmailAddress = userDomain.EmailAddress,
+                HandicapIndex = userDomain.HandicapIndex,
+                HomeCourseName = userDomain.HomeCourseName,
+                Scores = userDomain.Scores,
+                Posts = userDomain.Posts,
+                GolfCourseId = userDomain.GolfCourseId,
             };
 
             return userResponse;
         }
 
-        private List<UserResponse> ConvertUsers(IEnumerable<UserDomain> userDomains)
+        private List<UserResponse> ConvertUsers(IEnumerable<User> userDomains)
         {
             if (userDomains == null)
             {

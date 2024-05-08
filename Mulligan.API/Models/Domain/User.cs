@@ -1,10 +1,11 @@
-﻿using Mulligan.API.Models.Domain;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Mulligan.API.Models.Responses
+namespace Mulligan.API.Models.Domain
 {
-    public class UserResponse
+    public class User
     {
-        public Guid UserId { get; set; }
+        [Key]
+        public Guid Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
@@ -14,5 +15,6 @@ namespace Mulligan.API.Models.Responses
         public ICollection<Score>? Scores { get; set; }
         public ICollection<Post>? Posts { get; set; }
         public Guid? GolfCourseId { get; set; }
+        public GolfCourse? GolfCourse { get; set; }
     }
 }

@@ -1,10 +1,11 @@
-﻿using Mulligan.API.Models.Domain;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Mulligan.API.Models.Responses
+namespace Mulligan.API.Models.Domain
 {
-    public class GolfCourseResponse
+    public class GolfCourse
     {
-        public Guid GolfCourseId { get; set; }
+        [Key]
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
         public string? Subdivision { get; set; }

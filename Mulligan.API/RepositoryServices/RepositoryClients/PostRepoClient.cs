@@ -13,42 +13,42 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             this._dbContext = dbContext;
         }
 
-        public PostDomain AddPost(AddPostRequest addPostRequest)
+        public Post AddPost(AddPostRequest addPostRequest)
         {
-            var post = new PostDomain
+            var post = new Post
             {
-                CONTENT = addPostRequest.Content,
-                CREATED_DATE = DateTime.Now,
-                USER_ID = addPostRequest.UserId,
+                Content = addPostRequest.Content,
+                CreatedDate = DateTime.Now,
+                UserId = addPostRequest.UserId,
             };
 
-            _dbContext.POST.Add(post);
+            _dbContext.Post.Add(post);
             _dbContext.SaveChanges();
 
             return post;
         }
 
-        public List<PostDomain> GetAllPostsByUser(Guid userId)
+        public List<Post> GetAllPostsByUser(Guid userId)
         {
-            var posts = _dbContext.POST.ToList().Where(post => post.USER_ID.Equals(userId)).ToList();
+            var posts = _dbContext.Post.ToList().Where(post => post.UserId.Equals(userId)).ToList();
 
             return posts;
         }
 
-        public List<PostDomain> GetAllPosts()
+        public List<Post> GetAllPosts()
         {
-            var posts = _dbContext.POST.ToList();
+            var posts = _dbContext.Post.ToList();
 
             return posts;
         }
 
         public bool DeletePost(Guid id)
         {
-            var post = _dbContext.POST.Find(id);
+            var post = _dbContext.Post.Find(id);
 
             if (post != null)
             {
-                _dbContext.POST.Remove(post);
+                _dbContext.Post.Remove(post);
                 _dbContext.SaveChanges();
 
                 return true;

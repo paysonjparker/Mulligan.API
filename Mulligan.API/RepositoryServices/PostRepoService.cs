@@ -34,7 +34,7 @@ namespace Mulligan.API.RepositoryServices
             return _postRepoClient.DeletePost(postId);
         }
 
-        private PostResponse ConvertPost(PostDomain postDomain)
+        private PostResponse ConvertPost(Post postDomain)
         {
             if(postDomain == null)
             {
@@ -42,16 +42,16 @@ namespace Mulligan.API.RepositoryServices
             }
             PostResponse postResponse = new PostResponse
             {
-                PostId = postDomain.POST_ID,
-                Content = postDomain.CONTENT,
-                CreatedDate = postDomain.CREATED_DATE,
-                UserId = postDomain.USER_ID,
+                PostId = postDomain.Id,
+                Content = postDomain.Content,
+                CreatedDate = postDomain.CreatedDate,
+                UserId = postDomain.UserId,
             };
 
             return postResponse;
         }
 
-        private List<PostResponse> ConvertPosts(IEnumerable<PostDomain> postDomains)
+        private List<PostResponse> ConvertPosts(IEnumerable<Post> postDomains)
         {
             if(postDomains == null)
             {

@@ -15,51 +15,51 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             this._dbContext = dbContext;
         }
 
-        public ScoreDomain AddScore(AddScoreRequest addScoreRequest)
+        public Score AddScore(AddScoreRequest addScoreRequest)
         {
-            var user = _dbContext.USER.Find(addScoreRequest.UserId);
+            var user = _dbContext.User.Find(addScoreRequest.UserId);
 
-            var score = new ScoreDomain
+            var score = new Score
             {
-                TOTAL = addScoreRequest.Total,
-                DIFFERENTIAL = CalculateScoreDifferential(addScoreRequest.Total, addScoreRequest.GolfCourseId),
-                CREATED_DATE = DateTime.Now,
-                USER_ID = addScoreRequest.UserId,
-                GOLF_COURSE_ID = addScoreRequest.GolfCourseId,
+                Total = addScoreRequest.Total,
+                Differential = CalculateScoreDifferential(addScoreRequest.Total, addScoreRequest.GolfCourseId),
+                CreatedDate = DateTime.Now,
+                UserId = addScoreRequest.UserId,
+                GolfCourseId = addScoreRequest.GolfCourseId,
             };
 
             if(user != null)
             {
-                user.HANDICAP_INDEX = (float)Math.Round(CalculateHandicapIndex(user.USER_ID), 1);
+                user.HandicapIndex = (float)Math.Round(CalculateHandicapIndex(user.Id), 1);
             }
 
-            _dbContext.SCORE.Add(score);
+            _dbContext.Score.Add(score);
             _dbContext.SaveChanges();
 
             return score;
         }
 
-        public List<ScoreDomain> GetAllScoresByUser(Guid userId)
+        public List<Score> GetAllScoresByUser(Guid userId)
         {
-            var scores = _dbContext.SCORE.ToList().Where(user => user.USER_ID.Equals(userId)).ToList();
+            var scores = _dbContext.Score.ToList().Where(user => user.UserId.Equals(userId)).ToList();
 
             return scores;
         }
 
-        public List<ScoreDomain> GetAllScoresByGolfCourse(Guid golfCourseId)
+        public List<Score> GetAllScoresByGolfCourse(Guid golfCourseId)
         {
-            var scores = _dbContext.SCORE.Where(score => score.GOLF_COURSE_ID.Equals(golfCourseId)).ToList();
+            var scores = _dbContext.Score.Where(score => score.GolfCourseId.Equals(golfCourseId)).ToList();
 
             return scores;
         }
 
         public bool DeleteScore(Guid id)
         {
-            var score = _dbContext.SCORE.Find(id);
+            var score = _dbContext.Score.Find(id);
 
             if (score != null)
             {
-                _dbContext.SCORE.Remove(score);
+                _dbContext.Score.Remove(score);
                 _dbContext.SaveChanges();
 
                 return true;
@@ -78,65 +78,65 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             {
                 scoreList = scoreList.Take(20).ToList();
             }
-            scoreList = scoreList.OrderBy(score => score.DIFFERENTIAL).ToList();
+            scoreList = scoreList.OrderBy(score => score.Differential).ToList();
             if (scoreList.Count == 1)
             {
-                return scoreList.ElementAt(0).DIFFERENTIAL - 2;
+                return scoreList.ElementAt(0).Differential - 2;
             }
             if (scoreList.Count == 2 || scoreList.Count == 3)
             {
-                return scoreList.ElementAt(0).DIFFERENTIAL - 2;
+                return scoreList.ElementAt(0).Differential - 2;
             }
             if (scoreList.Count == 4)
             {
-                return scoreList.ElementAt(0).DIFFERENTIAL - 1;
+                return scoreList.ElementAt(0).Differential - 1;
             }
             if (scoreList.Count == 5)
             {
-                return scoreList.ElementAt(0).DIFFERENTIAL;
+                return scoreList.ElementAt(0).Differential;
             }
             if (scoreList.Count == 6)
             {
-                return ((scoreList.ElementAt(0).DIFFERENTIAL + scoreList.ElementAt(1).DIFFERENTIAL) / 2) - 1;
+                return ((scoreList.ElementAt(0).Differential + scoreList.ElementAt(1).Differential) / 2) - 1;
             }
             if (scoreList.Count == 7 || scoreList.Count == 8)
             {
-                return (scoreList.ElementAt(0).DIFFERENTIAL + scoreList.ElementAt(1).DIFFERENTIAL) / 2;
+                return (scoreList.ElementAt(0).Differential + scoreList.ElementAt(1).Differential) / 2;
             }
             if (scoreList.Count >= 9 && scoreList.Count <= 11)
             {
-                return (scoreList.ElementAt(0).DIFFERENTIAL + scoreList.ElementAt(1).DIFFERENTIAL + scoreList.ElementAt(2).DIFFERENTIAL) / 3;
+                return (scoreList.ElementAt(0).Differential + scoreList.ElementAt(1).Differential + scoreList.ElementAt(2).Differential) / 3;
             }
             if (scoreList.Count >= 12 && scoreList.Count <= 14)
             {
-                return (scoreList.ElementAt(0).DIFFERENTIAL + scoreList.ElementAt(1).DIFFERENTIAL
-                    + scoreList.ElementAt(2).DIFFERENTIAL + scoreList.ElementAt(3).DIFFERENTIAL) / 4;
+                return (scoreList.ElementAt(0).Differential + scoreList.ElementAt(1).Differential
+                    + scoreList.ElementAt(2).Differential + scoreList.ElementAt(3).Differential) / 4;
             }
             if (scoreList.Count == 15 || scoreList.Count == 16)
             {
-                return (scoreList.ElementAt(0).DIFFERENTIAL + scoreList.ElementAt(1).DIFFERENTIAL
-                    + scoreList.ElementAt(2).DIFFERENTIAL + scoreList.ElementAt(3).DIFFERENTIAL
-                    + scoreList.ElementAt(4).DIFFERENTIAL) / 5;
+                return (scoreList.ElementAt(0).Differential + scoreList.ElementAt(1).Differential
+                    + scoreList.ElementAt(2).Differential + scoreList.ElementAt(3).Differential
+                    + scoreList.ElementAt(4).Differential) / 5;
             }
             if (scoreList.Count == 17 || scoreList.Count == 18)
             {
-                return (scoreList.ElementAt(0).DIFFERENTIAL + scoreList.ElementAt(1).DIFFERENTIAL
-                    + scoreList.ElementAt(2).DIFFERENTIAL + scoreList.ElementAt(3).DIFFERENTIAL
-                    + scoreList.ElementAt(4).DIFFERENTIAL + scoreList.ElementAt(5).DIFFERENTIAL) / 6;
+                return (scoreList.ElementAt(0).Differential + scoreList.ElementAt(1).Differential
+                    + scoreList.ElementAt(2).Differential + scoreList.ElementAt(3).Differential
+                    + scoreList.ElementAt(4).Differential + scoreList.ElementAt(5).Differential) / 6;
             }
             if (scoreList.Count == 19)
             {
-                return (scoreList.ElementAt(0).DIFFERENTIAL + scoreList.ElementAt(1).DIFFERENTIAL
-                    + scoreList.ElementAt(2).DIFFERENTIAL + scoreList.ElementAt(3).DIFFERENTIAL
-                    + scoreList.ElementAt(4).DIFFERENTIAL + scoreList.ElementAt(5).DIFFERENTIAL
-                    + scoreList.ElementAt(6).DIFFERENTIAL) / 7;
+                return (scoreList.ElementAt(0).Differential + scoreList.ElementAt(1).Differential
+                    + scoreList.ElementAt(2).Differential + scoreList.ElementAt(3).Differential
+                    + scoreList.ElementAt(4).Differential + scoreList.ElementAt(5).Differential
+                    + scoreList.ElementAt(6).Differential) / 7;
             }
             if (scoreList.Count >= 20)
             {
-                return (scoreList.ElementAt(0).DIFFERENTIAL + scoreList.ElementAt(1).DIFFERENTIAL
-                    + scoreList.ElementAt(2).DIFFERENTIAL + scoreList.ElementAt(3).DIFFERENTIAL
-                    + scoreList.ElementAt(4).DIFFERENTIAL + scoreList.ElementAt(5).DIFFERENTIAL
-                    + scoreList.ElementAt(6).DIFFERENTIAL + scoreList.ElementAt(7).DIFFERENTIAL) / 8;
+                return (scoreList.ElementAt(0).Differential + scoreList.ElementAt(1).Differential
+                    + scoreList.ElementAt(2).Differential + scoreList.ElementAt(3).Differential
+                    + scoreList.ElementAt(4).Differential + scoreList.ElementAt(5).Differential
+                    + scoreList.ElementAt(6).Differential + scoreList.ElementAt(7).Differential) / 8;
             }
 
             return 0;
@@ -144,12 +144,12 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
 
         public float CalculateScoreDifferential(int scoreTotal, Guid golfCourseId)
         {
-            var golfCourse = _dbContext.GOLF_COURSE.Find(golfCourseId);
+            var golfCourse = _dbContext.GolfCourse.Find(golfCourseId);
 
             if(golfCourse != null)
             {
-                float slopeRating = golfCourse.SLOPE_RATING;
-                float courseRating = golfCourse.COURSE_RATING;
+                float slopeRating = golfCourse.SlopeRating;
+                float courseRating = golfCourse.CourseRating;
 
                 var differential = ((113 / slopeRating) * (scoreTotal - courseRating));
 

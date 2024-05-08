@@ -39,7 +39,7 @@ namespace Mulligan.API.RepositoryServices
             return ConvertGolfCourse(_golfCourseRepoClient.UpdateGolfCourse(golfCourseId, golfCourseUpdateRequest));
         }
 
-        private GolfCourseResponse ConvertGolfCourse(GolfCourseDomain golfCourseDomain)
+        private GolfCourseResponse ConvertGolfCourse(GolfCourse golfCourseDomain)
         {
             if (golfCourseDomain == null)
             {
@@ -47,23 +47,23 @@ namespace Mulligan.API.RepositoryServices
             }
             GolfCourseResponse golfCourseResponse = new GolfCourseResponse
             {
-                GolfCourseId = golfCourseDomain.GOLF_COURSE_ID,
-                Name = golfCourseDomain.NAME,
-                City = golfCourseDomain.CITY,
-                Subdivision = golfCourseDomain.SUBDIVISION,
-                Country = golfCourseDomain.COUNTRY,
-                Yardage = golfCourseDomain.YARDAGE,
-                Par = golfCourseDomain.PAR,
-                SlopeRating = golfCourseDomain.SLOPE_RATING,
-                CourseRating = golfCourseDomain.COURSE_RATING,
-                Users = golfCourseDomain.USERS,
-                Scores = golfCourseDomain.SCORES,
+                GolfCourseId = golfCourseDomain.Id,
+                Name = golfCourseDomain.Name,
+                City = golfCourseDomain.City,
+                Subdivision = golfCourseDomain.Subdivision,
+                Country = golfCourseDomain.Country,
+                Yardage = golfCourseDomain.Yardage,
+                Par = golfCourseDomain.Par,
+                SlopeRating = golfCourseDomain.SlopeRating,
+                CourseRating = golfCourseDomain.CourseRating,
+                Users = golfCourseDomain.Users,
+                Scores = golfCourseDomain.Scores,
             };
 
             return golfCourseResponse;
         }
 
-        private List<GolfCourseResponse> ConvertGolfCourseList(IEnumerable<GolfCourseDomain> golfCourseDomains)
+        private List<GolfCourseResponse> ConvertGolfCourseList(IEnumerable<GolfCourse> golfCourseDomains)
         {
             if (golfCourseDomains == null)
             {
