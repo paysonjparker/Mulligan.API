@@ -12,8 +12,8 @@ using Mulligan.API.Data;
 namespace Mulligan.API.Migrations
 {
     [DbContext(typeof(MulliganDbContext))]
-    [Migration("20240507173553_initNewDesign")]
-    partial class initNewDesign
+    [Migration("20240507221807_testy")]
+    partial class testy
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

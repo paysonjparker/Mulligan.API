@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Mulligan.API.BusinessServices;
 using Mulligan.API.Data;
+using Mulligan.API.RepositoryServices;
+using Mulligan.API.RepositoryServices.RepositoryClients;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,18 +13,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddScoped<IGolfCourseBusinessService, GolfCourseBusinessService>();
-//builder.Services.AddScoped<IGolfCourseRepoService, GolfCourseRepoService>();
-//builder.Services.AddScoped<IGolfCourseRepoClient, GolfCourseRepoClient>();
-//builder.Services.AddScoped<IPostBusinessService, PostBusinessService>();
-//builder.Services.AddScoped<IPostRepoService, PostRepoService>();
-//builder.Services.AddScoped<IPostRepoClient, PostRepoClient>();
-//builder.Services.AddScoped<IScoreBusinessService, ScoreBusinessService>();
-//builder.Services.AddScoped<IScoreRepoService, ScoreRepoService>();
-//builder.Services.AddScoped<IScoreRepoClient, ScoreRepoClient>();
-//builder.Services.AddScoped<IUserBusinessService, UserBusinessService>();
-//builder.Services.AddScoped<IUserRepoService, UserRepoService>();
-//builder.Services.AddScoped<IUserRepoClient, UserRepoClient>();
+builder.Services.AddScoped<IGolfCourseBusinessService, GolfCourseBusinessService>();
+builder.Services.AddScoped<IGolfCourseRepoService, GolfCourseRepoService>();
+builder.Services.AddScoped<IGolfCourseRepoClient, GolfCourseRepoClient>();
+builder.Services.AddScoped<IPostBusinessService, PostBusinessService>();
+builder.Services.AddScoped<IPostRepoService, PostRepoService>();
+builder.Services.AddScoped<IPostRepoClient, PostRepoClient>();
+builder.Services.AddScoped<IScoreBusinessService, ScoreBusinessService>();
+builder.Services.AddScoped<IScoreRepoService, ScoreRepoService>();
+builder.Services.AddScoped<IScoreRepoClient, ScoreRepoClient>();
+builder.Services.AddScoped<IUserBusinessService, UserBusinessService>();
+builder.Services.AddScoped<IUserRepoService, UserRepoService>();
+builder.Services.AddScoped<IUserRepoClient, UserRepoClient>();
 
 builder.Services.AddDbContext<MulliganDbContext>(options =>
 {

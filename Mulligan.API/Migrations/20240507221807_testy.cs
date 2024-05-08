@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Mulligan.API.Migrations
 {
     /// <inheritdoc />
-    public partial class initNewDesign : Migration
+    public partial class testy : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,7 +47,7 @@ namespace Mulligan.API.Migrations
                 {
                     table.PrimaryKey("PK_USER", x => x.USER_ID);
                     table.ForeignKey(
-                        name: "FK_USER_GOLF_COURSE_GOLF_COURSE_ID",
+                        name: "FK_USER_GOLF_COURSE_GolfCourseDomainGOLF_COURSE_ID",
                         column: x => x.GOLF_COURSE_ID,
                         principalTable: "GOLF_COURSE",
                         principalColumn: "GOLF_COURSE_ID",
@@ -67,7 +67,7 @@ namespace Mulligan.API.Migrations
                 {
                     table.PrimaryKey("PK_POST", x => x.POST_ID);
                     table.ForeignKey(
-                        name: "FK_POST_USER_USER_ID",
+                        name: "FK_POST_USER_UserDomainUSER_ID",
                         column: x => x.USER_ID,
                         principalTable: "USER",
                         principalColumn: "USER_ID",
@@ -89,13 +89,13 @@ namespace Mulligan.API.Migrations
                 {
                     table.PrimaryKey("PK_SCORE", x => x.SCORE_ID);
                     table.ForeignKey(
-                        name: "FK_SCORE_GOLF_COURSE_GOLF_COURSE_ID",
+                        name: "FK_SCORE_GOLF_COURSE_GolfCourseDomainGOLF_COURSE_ID",
                         column: x => x.GOLF_COURSE_ID,
                         principalTable: "GOLF_COURSE",
                         principalColumn: "GOLF_COURSE_ID",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
-                        name: "FK_SCORE_USER_USER_ID",
+                        name: "FK_SCORE_USER_UserDomainUSER_ID",
                         column: x => x.USER_ID,
                         principalTable: "USER",
                         principalColumn: "USER_ID",
@@ -103,22 +103,22 @@ namespace Mulligan.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_POST_USER_ID",
+                name: "IX_POST_UserDomainUSER_ID",
                 table: "POST",
                 column: "USER_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SCORE_GOLF_COURSE_ID",
+                name: "IX_SCORE_GolfCourseDomainGOLF_COURSE_ID",
                 table: "SCORE",
                 column: "GOLF_COURSE_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SCORE_USER_ID",
+                name: "IX_SCORE_UserDomainUSER_ID",
                 table: "SCORE",
                 column: "USER_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_USER_GOLF_COURSE_ID",
+                name: "IX_USER_GolfCourseDomainGOLF_COURSE_ID",
                 table: "USER",
                 column: "GOLF_COURSE_ID");
         }

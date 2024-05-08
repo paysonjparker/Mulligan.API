@@ -53,8 +53,8 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
 
             foreach (var golfCourse in golfCourses)
             {
-                golfCourse.SCORES = _dbContext.SCORE.Where(score => score.GOLF_COURSE_ID == golfCourse.GOLF_COURSE_ID).ToList();
-                golfCourse.USERS = _dbContext.USER.Where(user => user.GOLF_COURSE_ID == golfCourse.GOLF_COURSE_ID).ToList();
+                golfCourse.SCORES = _dbContext.SCORE.Where(score => score.GOLF_COURSE_ID.Equals(golfCourse.GOLF_COURSE_ID)).ToList();
+                golfCourse.USERS = _dbContext.USER.Where(user => user.GOLF_COURSE_ID.Equals(golfCourse.GOLF_COURSE_ID)).ToList();
             }
 
             return golfCourses;
@@ -71,8 +71,8 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
 
             if (golfCourse != null)
             {
-                golfCourse.SCORES = _dbContext.SCORE.Where(score => score.GOLF_COURSE_ID == golfCourse.GOLF_COURSE_ID).ToList();
-                golfCourse.USERS = _dbContext.USER.Where(user => user.GOLF_COURSE_ID == golfCourse.GOLF_COURSE_ID).ToList();
+                golfCourse.SCORES = _dbContext.SCORE.Where(score => score.GOLF_COURSE_ID.Equals(golfCourse.GOLF_COURSE_ID)).ToList();
+                golfCourse.USERS = _dbContext.USER.Where(user => user.GOLF_COURSE_ID.Equals(golfCourse.GOLF_COURSE_ID)).ToList();
 
                 return golfCourse;
             }

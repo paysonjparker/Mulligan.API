@@ -6,28 +6,24 @@ namespace Mulligan.API.BusinessServices
 {
     public class GolfCourseBusinessService : IGolfCourseBusinessService
     {
-        // Db Context
         private readonly IGolfCourseRepoService _golfCourseRepoService;
 
-        /// <summary>
-        /// Constrcutor 
-        /// </summary>
         public GolfCourseBusinessService(IGolfCourseRepoService golfCourseRepoService)
         {
             _golfCourseRepoService = golfCourseRepoService;
         }
 
-        public GolfCourseResponse? AddGolfCourse(AddGolfCourseRequest addGolfCourseRequest)
+        public GolfCourseResponse AddGolfCourse(AddGolfCourseRequest addGolfCourseRequest)
         {
             return _golfCourseRepoService.AddGolfCourse(addGolfCourseRequest);
         }
 
-        public IEnumerable<GolfCourseResponse>? GetAllGolfCourses()
+        public IEnumerable<GolfCourseResponse> GetAllGolfCourses()
         {
             return _golfCourseRepoService.GetAllGolfCourses();
         }
 
-        public GolfCourseResponse? GetGolfCourseById(Guid golfCourseId)
+        public GolfCourseResponse GetGolfCourseById(Guid golfCourseId)
         {
             return _golfCourseRepoService.GetGolfCourseById(golfCourseId);
         }
@@ -37,7 +33,7 @@ namespace Mulligan.API.BusinessServices
             return _golfCourseRepoService.DeleteGolfCourse(golfCourseId);
         }
 
-        public GolfCourseResponse? UpdateGolfCourse(Guid golfCourseId, UpdateGolfCourseRequest golfCourseUpdateRequest)
+        public GolfCourseResponse UpdateGolfCourse(Guid golfCourseId, UpdateGolfCourseRequest golfCourseUpdateRequest)
         {
             return _golfCourseRepoService.UpdateGolfCourse(golfCourseId, golfCourseUpdateRequest);
         }
