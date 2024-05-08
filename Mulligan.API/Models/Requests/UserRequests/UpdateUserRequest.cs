@@ -5,7 +5,7 @@ namespace Mulligan.API.Models.Requests.UserRequests
     [ExcludeFromCodeCoverage]
     public class UpdateUserRequest
     {
-        //test
+        //testy
         public string? Password { get; set; }
         public string? FullName { get; set; }
         public string? EmailAddress { get; set; }
