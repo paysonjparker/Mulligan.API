@@ -42,7 +42,7 @@ namespace Mulligan.API.RepositoryServices
             }
             PostResponse postResponse = new PostResponse
             {
-                PostId = postDomain.Id,
+                Id = postDomain.Id,
                 Content = postDomain.Content,
                 CreatedDate = postDomain.CreatedDate,
                 UserId = postDomain.UserId,

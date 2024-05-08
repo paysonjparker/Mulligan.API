@@ -73,12 +73,12 @@ namespace Mulligan.API.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Id");
 
                     b.ToTable("Post");
                 });
@@ -95,20 +95,20 @@ namespace Mulligan.API.Migrations
                     b.Property<float>("Differential")
                         .HasColumnType("real");
 
-                    b.Property<Guid?>("GolfCourseId")
+                    b.Property<Guid?>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Total")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GolfCourseId");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Id");
 
                     b.ToTable("Score");
                 });
@@ -127,7 +127,7 @@ namespace Mulligan.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("GolfCourseId")
+                    b.Property<Guid?>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<float>("HandicapIndex")
@@ -146,7 +146,7 @@ namespace Mulligan.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GolfCourseId");
+                    b.HasIndex("Id");
 
                     b.ToTable("User");
                 });
@@ -155,7 +155,7 @@ namespace Mulligan.API.Migrations
                 {
                     b.HasOne("Mulligan.API.Models.Domain.User", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -166,11 +166,11 @@ namespace Mulligan.API.Migrations
                 {
                     b.HasOne("Mulligan.API.Models.Domain.GolfCourse", "GolfCourse")
                         .WithMany("Scores")
-                        .HasForeignKey("GolfCourseId");
+                        .HasForeignKey("Id");
 
                     b.HasOne("Mulligan.API.Models.Domain.User", "User")
                         .WithMany("Scores")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -183,7 +183,7 @@ namespace Mulligan.API.Migrations
                 {
                     b.HasOne("Mulligan.API.Models.Domain.GolfCourse", "GolfCourse")
                         .WithMany("Users")
-                        .HasForeignKey("GolfCourseId");
+                        .HasForeignKey("Id");
 
                     b.Navigation("GolfCourse");
                 });

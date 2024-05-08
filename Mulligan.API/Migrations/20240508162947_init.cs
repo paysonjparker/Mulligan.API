@@ -105,22 +105,22 @@ namespace Mulligan.API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Post_UserId",
                 table: "Post",
-                column: "UserId");
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Score_GolfCourseId",
                 table: "Score",
-                column: "GolfCourseId");
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Score_UserId",
                 table: "Score",
-                column: "UserId");
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_GolfCourseId",
                 table: "User",
-                column: "GolfCourseId");
+                column: "Id");
         }
 
         /// <inheritdoc />

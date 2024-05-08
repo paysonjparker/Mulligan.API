@@ -53,7 +53,7 @@ namespace Mulligan.API.RepositoryServices
             }
             UserResponse userResponse = new UserResponse
             {
-                UserId = userDomain.Id,
+                Id = userDomain.Id,
                 Username = userDomain.Username,
                 Password = userDomain.Password,
                 FullName = userDomain.FullName,

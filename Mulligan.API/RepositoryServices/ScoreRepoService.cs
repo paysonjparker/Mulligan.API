@@ -42,7 +42,7 @@ namespace Mulligan.API.RepositoryServices
             }
             ScoreResponse scoreResponse = new ScoreResponse
             {
-                ScoreId = scoreDomain.Id,
+                Id = scoreDomain.Id,
                 Differential = scoreDomain.Differential,
                 Total = scoreDomain.Total,
                 CreatedDate = scoreDomain.CreatedDate,

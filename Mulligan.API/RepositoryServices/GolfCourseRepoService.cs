@@ -47,7 +47,7 @@ namespace Mulligan.API.RepositoryServices
             }
             GolfCourseResponse golfCourseResponse = new GolfCourseResponse
             {
-                GolfCourseId = golfCourseDomain.Id,
+                Id = golfCourseDomain.Id,
                 Name = golfCourseDomain.Name,
                 City = golfCourseDomain.City,
                 Subdivision = golfCourseDomain.Subdivision,
