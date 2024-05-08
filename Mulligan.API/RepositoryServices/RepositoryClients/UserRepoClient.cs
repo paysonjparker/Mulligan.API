@@ -17,7 +17,12 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
         public User AddUser(AddUserRequest addUserRequest)
         {
             var homeCourse = _dbContext.GolfCourse.Find(addUserRequest.GolfCourseId);
+            string homeCourseName = null;
 
+            if (homeCourse != null)
+            {
+                homeCourseName = homeCourse.Name;
+            }
             var user = new User
             {
                 Username = addUserRequest.Username,
@@ -25,7 +30,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
                 FullName = addUserRequest.FullName,
                 EmailAddress = addUserRequest.EmailAddress,
                 HandicapIndex = 0,
-                HomeCourseName = homeCourse.Name ?? null,
+                HomeCourseName = homeCourseName ?? null,
                 GolfCourseId = addUserRequest.GolfCourseId ?? null,
             };
 
