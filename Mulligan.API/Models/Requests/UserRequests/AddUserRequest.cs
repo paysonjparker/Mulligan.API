@@ -1,8 +1,10 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mulligan.API.Models.Requests.UserRequests
 {
+    [ExcludeFromCodeCoverage]
     public class AddUserRequest
     {
         [Required]

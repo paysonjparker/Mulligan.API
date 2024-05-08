@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mulligan.API.Models.Requests.ScoreRequests
 {
+    [ExcludeFromCodeCoverage]
     public class AddScoreRequest
     {
         [Required]

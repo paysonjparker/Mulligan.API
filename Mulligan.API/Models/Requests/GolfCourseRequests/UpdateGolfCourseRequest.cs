@@ -1,5 +1,8 @@
-﻿namespace Mulligan.API.Models.Requests.GolfCourseRequests
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Mulligan.API.Models.Requests.GolfCourseRequests
 {
+    [ExcludeFromCodeCoverage]
     public class UpdateGolfCourseRequest
     {
         public string? Name { get; set; }
