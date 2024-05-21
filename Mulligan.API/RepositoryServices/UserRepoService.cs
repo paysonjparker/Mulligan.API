@@ -1,4 +1,5 @@
-﻿using Mulligan.API.Models.Domain;
+﻿using Mulligan.API.Models.Authentication;
+using Mulligan.API.Models.Domain;
 using Mulligan.API.Models.Requests.ScoreRequests;
 using Mulligan.API.Models.Requests.UserRequests;
 using Mulligan.API.Models.Responses;
@@ -13,6 +14,11 @@ namespace Mulligan.API.RepositoryServices
         public UserRepoService(IUserRepoClient userRepoClient)
         {
             _userRepoClient = userRepoClient;
+        }
+
+        public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest)
+        {
+            return _userRepoClient.Authenticate(authenticateRequest);
         }
 
         public UserResponse AddUser(AddUserRequest addUserRequest)

@@ -1,5 +1,10 @@
-﻿using Mulligan.API.BusinessServices;
+﻿using AutoMapper;
+using BCrypt.Net;
+using Microsoft.EntityFrameworkCore;
+using Mulligan.API.Authorization;
 using Mulligan.API.Data;
+using Mulligan.API.Helpers;
+using Mulligan.API.Models.Authentication;
 using Mulligan.API.Models.Domain;
 using Mulligan.API.Models.Requests.UserRequests;
 
@@ -8,14 +13,35 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
     public class UserRepoClient : IUserRepoClient
     {
         private readonly MulliganDbContext _dbContext;
+        private IJwtUtils _jwtUtils;
+        private readonly IMapper _mapper;
 
-        public UserRepoClient(MulliganDbContext dbContext)
+        public UserRepoClient(MulliganDbContext dbContext, IJwtUtils jwtUtils, IMapper mapper)
         {
             this._dbContext = dbContext;
+            _jwtUtils = jwtUtils;
+            _mapper = mapper;
+        }
+
+        public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest)
+        {
+            var user = _dbContext.User.SingleOrDefault(user => user.Username == authenticateRequest.Username);
+            if (user == null || !BCrypt.Net.BCrypt.Verify(authenticateRequest.Password, user.Password))
+            {
+                throw new Exception("Useranme or Password is incorrect");
+            }
+            var response = _mapper.Map<AuthenticateResponse>(user);
+            response.Token = _jwtUtils.GenerateToken(user);
+            return response;
         }
 
         public User AddUser(AddUserRequest addUserRequest)
         {
+            if (_dbContext.User.Any(user => user.Username == addUserRequest.Username))
+            {
+                throw new AppException("Username '" + addUserRequest.Username + "' is already taken");
+            }
+
             var homeCourse = _dbContext.GolfCourse.Find(addUserRequest.GolfCourseId);
             string homeCourseName = null;
 
@@ -26,7 +52,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             var user = new User
             {
                 Username = addUserRequest.Username,
-                Password = addUserRequest.Password,
+                Password = BCrypt.Net.BCrypt.HashPassword(addUserRequest.Password),
                 FullName = addUserRequest.FullName,
                 EmailAddress = addUserRequest.EmailAddress,
                 HandicapIndex = 0,
@@ -87,7 +113,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
 
             if (user != null)
             {
-                user.Password = updateUserRequest.Password ?? user.Password;
+                user.Password = BCrypt.Net.BCrypt.HashPassword(updateUserRequest.Password) ?? user.Password;
                 user.FullName = updateUserRequest.FullName;
                 user.EmailAddress = updateUserRequest.EmailAddress;
                 user.HomeCourseName = homeCourse.Name ?? null;

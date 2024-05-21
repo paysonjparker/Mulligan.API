@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Mulligan.API.Authorization;
 using Mulligan.API.BusinessServices;
+using Mulligan.API.Models.Authentication;
 using Mulligan.API.Models.Requests.UserRequests;
 
 namespace Mulligan.API.Controllers
@@ -15,6 +17,14 @@ namespace Mulligan.API.Controllers
         public UsersController(IUserBusinessService userBusinessService)
         {
             _userBusinessService = userBusinessService;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(AuthenticateRequest authenticateRequest)
+        {
+            var response = _userBusinessService.Authenticate(authenticateRequest);
+            return Ok(response);
         }
 
         [HttpGet]

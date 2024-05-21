@@ -1,4 +1,5 @@
-﻿using Mulligan.API.Models.Domain;
+﻿using Mulligan.API.Models.Authentication;
+using Mulligan.API.Models.Domain;
 using Mulligan.API.Models.Requests.UserRequests;
 
 namespace Mulligan.API.RepositoryServices.RepositoryClients
@@ -11,5 +12,6 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
         public User GetUserById(int id);
         public User UpdateUser(int id, UpdateUserRequest updateUserRequest);
         public bool DeleteUser(int id);
+        public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest);
     }
 }

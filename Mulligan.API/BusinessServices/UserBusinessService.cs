@@ -1,4 +1,5 @@
-﻿using Mulligan.API.Models.Requests.UserRequests;
+﻿using Mulligan.API.Models.Authentication;
+using Mulligan.API.Models.Requests.UserRequests;
 using Mulligan.API.Models.Responses;
 using Mulligan.API.RepositoryServices;
 
@@ -40,6 +41,11 @@ namespace Mulligan.API.BusinessServices
         public bool DeleteScore(int userId)
         {
             return _userRepoService.DeleteUser(userId);
+        }
+
+        public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest)
+        {
+            return _userRepoService.Authenticate(authenticateRequest);
         }
     }
 }
