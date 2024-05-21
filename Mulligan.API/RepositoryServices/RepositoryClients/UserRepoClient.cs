@@ -14,13 +14,11 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
     {
         private readonly MulliganDbContext _dbContext;
         private IJwtUtils _jwtUtils;
-        private readonly IMapper _mapper;
 
-        public UserRepoClient(MulliganDbContext dbContext, IJwtUtils jwtUtils, IMapper mapper)
+        public UserRepoClient(MulliganDbContext dbContext, IJwtUtils jwtUtils)
         {
             this._dbContext = dbContext;
             _jwtUtils = jwtUtils;
-            _mapper = mapper;
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest)
@@ -30,8 +28,13 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             {
                 throw new Exception("Useranme or Password is incorrect");
             }
-            var response = _mapper.Map<AuthenticateResponse>(user);
-            response.Token = _jwtUtils.GenerateToken(user);
+            var response = new AuthenticateResponse()
+            {
+                Id = user.Id,
+                Username = user.Username,
+                FullName = user.FullName,
+                Token = _jwtUtils.GenerateToken(user),
+            };
             return response;
         }
 

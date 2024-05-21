@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Mulligan.API.Authorization;
 using Mulligan.API.BusinessServices;
 using Mulligan.API.Data;
+using Mulligan.API.Helpers;
 using Mulligan.API.RepositoryServices;
 using Mulligan.API.RepositoryServices.RepositoryClients;
 
@@ -12,6 +14,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 builder.Services.AddScoped<IGolfCourseBusinessService, GolfCourseBusinessService>();
 builder.Services.AddScoped<IGolfCourseRepoService, GolfCourseRepoService>();
@@ -25,6 +29,7 @@ builder.Services.AddScoped<IScoreRepoClient, ScoreRepoClient>();
 builder.Services.AddScoped<IUserBusinessService, UserBusinessService>();
 builder.Services.AddScoped<IUserRepoService, UserRepoService>();
 builder.Services.AddScoped<IUserRepoClient, UserRepoClient>();
+builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 
 builder.Services.AddDbContext<MulliganDbContext>(options =>
 {
@@ -45,6 +50,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 app.UseCors("AllowAngularOrigins");
+app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseMiddleware<JwtMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
