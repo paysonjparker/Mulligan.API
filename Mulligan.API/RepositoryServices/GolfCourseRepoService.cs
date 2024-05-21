@@ -24,17 +24,17 @@ namespace Mulligan.API.RepositoryServices
             return ConvertGolfCourseList(_golfCourseRepoClient.GetAllGolfCourses());
         }
 
-        public GolfCourseResponse GetGolfCourseById(Guid golfCourseId)
+        public GolfCourseResponse GetGolfCourseById(int golfCourseId)
         {
             return ConvertGolfCourse(_golfCourseRepoClient.GetGolfCourseById(golfCourseId));
         }
 
-        public bool DeleteGolfCourse(Guid golfCourseId)
+        public bool DeleteGolfCourse(int golfCourseId)
         {
             return _golfCourseRepoClient.DeleteGolfCourse(golfCourseId);
         }
 
-        public GolfCourseResponse UpdateGolfCourse(Guid golfCourseId, UpdateGolfCourseRequest golfCourseUpdateRequest )
+        public GolfCourseResponse UpdateGolfCourse(int golfCourseId, UpdateGolfCourseRequest golfCourseUpdateRequest )
         {
             return ConvertGolfCourse(_golfCourseRepoClient.UpdateGolfCourse(golfCourseId, golfCourseUpdateRequest));
         }

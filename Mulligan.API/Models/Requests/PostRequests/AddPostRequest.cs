@@ -9,6 +9,6 @@ namespace Mulligan.API.Models.Requests.PostRequests
         [Required]
         public string Content { get; set; }
         [Required]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
     }
 }

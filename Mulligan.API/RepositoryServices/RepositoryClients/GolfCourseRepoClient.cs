@@ -65,7 +65,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
         /// </summary>
         /// <param name="id">ID of the golf course</param>
         /// <returns>A golf course object</returns>
-        public GolfCourse GetGolfCourseById(Guid id)
+        public GolfCourse GetGolfCourseById(int id)
         {
             var golfCourse = _dbContext.GolfCourse.Find(id);
 
@@ -80,7 +80,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return null;
         }
 
-        public bool DeleteGolfCourse(Guid id)
+        public bool DeleteGolfCourse(int id)
         {
             var golfCourse = _dbContext.GolfCourse.Find(id);
 
@@ -101,7 +101,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
         /// <param name="id">ID number of the golf course being updated</param>
         /// <param name="updateGolfCourseRequest">Update golf course request</param>
         /// <returns>The newly updated golf course object</returns>
-        public GolfCourse UpdateGolfCourse(Guid id, UpdateGolfCourseRequest updateGolfCourseRequest)
+        public GolfCourse UpdateGolfCourse(int id, UpdateGolfCourseRequest updateGolfCourseRequest)
         {
             var golfCourse = _dbContext.GolfCourse.Find(id);
 

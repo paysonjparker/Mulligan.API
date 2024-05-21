@@ -7,7 +7,7 @@ namespace Mulligan.API.Models.Domain
     public class User
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
@@ -16,7 +16,7 @@ namespace Mulligan.API.Models.Domain
         public string? HomeCourseName { get; set; }
         public ICollection<Score>? Scores { get; set; }
         public ICollection<Post>? Posts { get; set; }
-        public Guid? GolfCourseId { get; set; }
+        public int? GolfCourseId { get; set; }
         public GolfCourse? GolfCourse { get; set; }
     }
 }

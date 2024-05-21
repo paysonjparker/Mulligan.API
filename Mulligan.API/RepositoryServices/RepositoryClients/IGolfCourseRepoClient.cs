@@ -7,8 +7,8 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
     {
         public GolfCourse AddGolfCourse(AddGolfCourseRequest addGolfCourseRequest);
         public List<GolfCourse> GetAllGolfCourses();
-        public GolfCourse GetGolfCourseById(Guid id);
-        public bool DeleteGolfCourse(Guid id);
-        public GolfCourse UpdateGolfCourse(Guid id, UpdateGolfCourseRequest updateGolfCourseRequest);
+        public GolfCourse GetGolfCourseById(int id);
+        public bool DeleteGolfCourse(int id);
+        public GolfCourse UpdateGolfCourse(int id, UpdateGolfCourseRequest updateGolfCourseRequest);
     }
 }

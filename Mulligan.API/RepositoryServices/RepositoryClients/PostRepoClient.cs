@@ -28,7 +28,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return post;
         }
 
-        public List<Post> GetAllPostsByUser(Guid userId)
+        public List<Post> GetAllPostsByUser(int userId)
         {
             var posts = _dbContext.Post.ToList().Where(post => post.UserId.Equals(userId)).ToList();
 
@@ -42,7 +42,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return posts;
         }
 
-        public bool DeletePost(Guid id)
+        public bool DeletePost(int id)
         {
             var post = _dbContext.Post.Find(id);
 

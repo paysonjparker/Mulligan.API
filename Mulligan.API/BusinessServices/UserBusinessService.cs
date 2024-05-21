@@ -18,7 +18,7 @@ namespace Mulligan.API.BusinessServices
             return _userRepoService.AddUser(addUserRequest);
         }
 
-        public UserResponse GetUserById(Guid userId)
+        public UserResponse GetUserById(int userId)
         {
             return _userRepoService.GetUserById(userId);
         }
@@ -28,16 +28,16 @@ namespace Mulligan.API.BusinessServices
             return _userRepoService.GetAllUsers();
         }
 
-        public IEnumerable<UserResponse> GetAllUsersByGolfCourse(Guid golfCourseId)
+        public IEnumerable<UserResponse> GetAllUsersByGolfCourse(int golfCourseId)
         {
             return _userRepoService.GetAllUsersByGolfCourse(golfCourseId);
         }
-        public UserResponse UpdateUser(Guid userId, UpdateUserRequest updateUserRequest)
+        public UserResponse UpdateUser(int userId, UpdateUserRequest updateUserRequest)
         {
             return _userRepoService.UpdateUser(userId, updateUserRequest);
         }
 
-        public bool DeleteScore(Guid userId)
+        public bool DeleteScore(int userId)
         {
             return _userRepoService.DeleteUser(userId);
         }

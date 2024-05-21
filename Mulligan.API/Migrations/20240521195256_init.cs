@@ -15,7 +15,8 @@ namespace Mulligan.API.Migrations
                 name: "GolfCourse",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Subdivision = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -34,14 +35,15 @@ namespace Mulligan.API.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HandicapIndex = table.Column<float>(type: "real", nullable: false),
                     HomeCourseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GolfCourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    GolfCourseId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,18 +52,18 @@ namespace Mulligan.API.Migrations
                         name: "FK_User_GolfCourse_GolfCourseId",
                         column: x => x.GolfCourseId,
                         principalTable: "GolfCourse",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Post",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,12 +80,13 @@ namespace Mulligan.API.Migrations
                 name: "Score",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Total = table.Column<int>(type: "int", nullable: false),
                     Differential = table.Column<float>(type: "real", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GolfCourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    GolfCourseId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -92,8 +95,7 @@ namespace Mulligan.API.Migrations
                         name: "FK_Score_GolfCourse_GolfCourseId",
                         column: x => x.GolfCourseId,
                         principalTable: "GolfCourse",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Score_User_UserId",
                         column: x => x.UserId,
@@ -105,22 +107,22 @@ namespace Mulligan.API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Post_UserId",
                 table: "Post",
-                column: "Id");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Score_GolfCourseId",
                 table: "Score",
-                column: "Id");
+                column: "GolfCourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Score_UserId",
                 table: "Score",
-                column: "Id");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_GolfCourseId",
                 table: "User",
-                column: "Id");
+                column: "GolfCourseId");
         }
 
         /// <inheritdoc />

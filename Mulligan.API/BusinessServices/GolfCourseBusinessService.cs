@@ -23,17 +23,17 @@ namespace Mulligan.API.BusinessServices
             return _golfCourseRepoService.GetAllGolfCourses();
         }
 
-        public GolfCourseResponse GetGolfCourseById(Guid golfCourseId)
+        public GolfCourseResponse GetGolfCourseById(int golfCourseId)
         {
             return _golfCourseRepoService.GetGolfCourseById(golfCourseId);
         }
 
-        public bool DeleteGolfCourse(Guid golfCourseId)
+        public bool DeleteGolfCourse(int golfCourseId)
         {
             return _golfCourseRepoService.DeleteGolfCourse(golfCourseId);
         }
 
-        public GolfCourseResponse UpdateGolfCourse(Guid golfCourseId, UpdateGolfCourseRequest golfCourseUpdateRequest)
+        public GolfCourseResponse UpdateGolfCourse(int golfCourseId, UpdateGolfCourseRequest golfCourseUpdateRequest)
         {
             return _golfCourseRepoService.UpdateGolfCourse(golfCourseId, golfCourseUpdateRequest);
         }

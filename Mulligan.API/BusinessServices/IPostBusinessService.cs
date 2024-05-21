@@ -6,8 +6,8 @@ namespace Mulligan.API.BusinessServices
     public interface IPostBusinessService
     {
         public PostResponse AddPost(AddPostRequest addPostRequest);
-        public IEnumerable<PostResponse> GetAllPostsByUser(Guid userId);
+        public IEnumerable<PostResponse> GetAllPostsByUser(int userId);
         public IEnumerable<PostResponse> GetAllPosts();
-        public bool DeletePost(Guid postId);
+        public bool DeletePost(int postId);
     }
 }

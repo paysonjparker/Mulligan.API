@@ -7,8 +7,8 @@ namespace Mulligan.API.BusinessServices
     {
         public GolfCourseResponse AddGolfCourse(AddGolfCourseRequest addGolfCourseRequest);
         public IEnumerable<GolfCourseResponse> GetAllGolfCourses();
-        public GolfCourseResponse GetGolfCourseById(Guid golfCourseId);
-        public bool DeleteGolfCourse(Guid golfCourseId);
-        public GolfCourseResponse UpdateGolfCourse(Guid golfCourseId, UpdateGolfCourseRequest golfCourseUpdateRequest);
+        public GolfCourseResponse GetGolfCourseById(int golfCourseId);
+        public bool DeleteGolfCourse(int golfCourseId);
+        public GolfCourseResponse UpdateGolfCourse(int golfCourseId, UpdateGolfCourseRequest golfCourseUpdateRequest);
     }
 }

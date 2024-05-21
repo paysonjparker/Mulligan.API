@@ -7,9 +7,9 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
     {
         public User AddUser(AddUserRequest addUserRequest);
         public List<User> GetAllUsers();
-        public List<User> GetAllUsersByGolfCourse(Guid golfCourseId);
-        public User GetUserById(Guid id);
-        public User UpdateUser(Guid id, UpdateUserRequest updateUserRequest);
-        public bool DeleteUser(Guid id);
+        public List<User> GetAllUsersByGolfCourse(int golfCourseId);
+        public User GetUserById(int id);
+        public User UpdateUser(int id, UpdateUserRequest updateUserRequest);
+        public bool DeleteUser(int id);
     }
 }

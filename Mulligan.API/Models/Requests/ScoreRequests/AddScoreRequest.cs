@@ -9,8 +9,8 @@ namespace Mulligan.API.Models.Requests.ScoreRequests
         [Required]
         public int Total { get; set; }
         [Required]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
         [Required]
-        public Guid GolfCourseId { get; set; }
+        public int GolfCourseId { get; set; }
     }
 }

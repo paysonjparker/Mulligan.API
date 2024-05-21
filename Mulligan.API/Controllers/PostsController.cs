@@ -33,8 +33,8 @@ namespace Mulligan.API.Controllers
         }
 
         [HttpGet]
-        [Route("{userId:Guid}")]
-        public IActionResult GetAllPostsByUser(Guid userId)
+        [Route("{userId:int}")]
+        public IActionResult GetAllPostsByUser(int userId)
         {
             try
             {
@@ -72,8 +72,8 @@ namespace Mulligan.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{postId:Guid}")]
-        public IActionResult DeletePost(Guid postId)
+        [Route("{postId:int}")]
+        public IActionResult DeletePost(int postId)
         {
             try
             {

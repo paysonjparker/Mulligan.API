@@ -25,22 +25,22 @@ namespace Mulligan.API.RepositoryServices
             return ConvertUsers(_userRepoClient.GetAllUsers());
         }
 
-        public IEnumerable<UserResponse> GetAllUsersByGolfCourse(Guid golfCourseId)
+        public IEnumerable<UserResponse> GetAllUsersByGolfCourse(int golfCourseId)
         {
             return ConvertUsers(_userRepoClient.GetAllUsersByGolfCourse(golfCourseId));
         }
 
-        public UserResponse GetUserById(Guid userId)
+        public UserResponse GetUserById(int userId)
         {
             return ConvertUser(_userRepoClient.GetUserById(userId));
         }
 
-        public UserResponse UpdateUser(Guid userId, UpdateUserRequest updateUserRequest)
+        public UserResponse UpdateUser(int userId, UpdateUserRequest updateUserRequest)
         {
             return ConvertUser(_userRepoClient.UpdateUser(userId, updateUserRequest));
         }
 
-        public bool DeleteUser(Guid userId)
+        public bool DeleteUser(int userId)
         {
             return _userRepoClient.DeleteUser(userId);
         }

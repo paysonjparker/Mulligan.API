@@ -39,21 +39,21 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return score;
         }
 
-        public List<Score> GetAllScoresByUser(Guid userId)
+        public List<Score> GetAllScoresByUser(int userId)
         {
             var scores = _dbContext.Score.ToList().Where(user => user.UserId.Equals(userId)).ToList();
 
             return scores;
         }
 
-        public List<Score> GetAllScoresByGolfCourse(Guid golfCourseId)
+        public List<Score> GetAllScoresByGolfCourse(int golfCourseId)
         {
             var scores = _dbContext.Score.Where(score => score.GolfCourseId.Equals(golfCourseId)).ToList();
 
             return scores;
         }
 
-        public bool DeleteScore(Guid id)
+        public bool DeleteScore(int id)
         {
             var score = _dbContext.Score.Find(id);
 
@@ -68,7 +68,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return false;
         }
 
-        public float CalculateHandicapIndex(Guid userId)
+        public float CalculateHandicapIndex(int userId)
         {
             var scoreList = GetAllScoresByUser(userId);
 
@@ -142,7 +142,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return 0;
         }
 
-        public float CalculateScoreDifferential(int scoreTotal, Guid golfCourseId)
+        public float CalculateScoreDifferential(int scoreTotal, int golfCourseId)
         {
             var golfCourse = _dbContext.GolfCourse.Find(golfCourseId);
 

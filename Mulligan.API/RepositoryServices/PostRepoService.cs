@@ -19,7 +19,7 @@ namespace Mulligan.API.RepositoryServices
             return ConvertPost(_postRepoClient.AddPost(addPostRequest));
         }
 
-        public IEnumerable<PostResponse> GetAllPostsByUser(Guid userId)
+        public IEnumerable<PostResponse> GetAllPostsByUser(int userId)
         {
             return ConvertPosts(_postRepoClient.GetAllPostsByUser(userId));
         }
@@ -29,7 +29,7 @@ namespace Mulligan.API.RepositoryServices
             return ConvertPosts(_postRepoClient.GetAllPosts());
         }
 
-        public bool DeletePost(Guid postId)
+        public bool DeletePost(int postId)
         {
             return _postRepoClient.DeletePost(postId);
         }

@@ -6,10 +6,10 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
     public interface IScoreRepoClient
     {
         public Score AddScore(AddScoreRequest addScoreRequest);
-        public List<Score> GetAllScoresByUser(Guid userId);
-        public List<Score> GetAllScoresByGolfCourse(Guid golfCourseId);
-        public bool DeleteScore(Guid id);
-        public float CalculateHandicapIndex(Guid userId);
-        public float CalculateScoreDifferential(int scoreTotal, Guid golfCourseId);
+        public List<Score> GetAllScoresByUser(int userId);
+        public List<Score> GetAllScoresByGolfCourse(int golfCourseId);
+        public bool DeleteScore(int id);
+        public float CalculateHandicapIndex(int userId);
+        public float CalculateScoreDifferential(int scoreTotal, int golfCourseId);
     }
 }

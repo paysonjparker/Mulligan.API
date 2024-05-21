@@ -15,6 +15,6 @@ namespace Mulligan.API.Models.Requests.UserRequests
         public string FullName { get; set; }
         [Required]
         public string EmailAddress { get; set; }
-        public Guid? GolfCourseId { get; set; }
+        public int? GolfCourseId { get; set; }
     }
 }

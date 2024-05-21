@@ -6,8 +6,8 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
     public interface IPostRepoClient
     {
         public Post AddPost(AddPostRequest addPostRequest);
-        public List<Post> GetAllPostsByUser(Guid userId);
+        public List<Post> GetAllPostsByUser(int userId);
         public List<Post> GetAllPosts();
-        public bool DeletePost(Guid id);
+        public bool DeletePost(int id);
     }
 }

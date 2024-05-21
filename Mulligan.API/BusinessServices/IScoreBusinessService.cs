@@ -6,8 +6,8 @@ namespace Mulligan.API.BusinessServices
     public interface IScoreBusinessService
     {
         public ScoreResponse AddScore(AddScoreRequest addScoreRequest);
-        public IEnumerable<ScoreResponse> GetAllScoresByUser(Guid userId);
-        public IEnumerable<ScoreResponse> GetAllScoresByGolfCourse(Guid golfCourseId);
-        public bool DeleteScore(Guid postId);
+        public IEnumerable<ScoreResponse> GetAllScoresByUser(int userId);
+        public IEnumerable<ScoreResponse> GetAllScoresByGolfCourse(int golfCourseId);
+        public bool DeleteScore(int postId);
     }
 }

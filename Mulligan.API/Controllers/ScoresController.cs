@@ -33,8 +33,8 @@ namespace Mulligan.API.Controllers
         }
 
         [HttpGet]
-        [Route("{userId:Guid}")]
-        public IActionResult GetAllScoresByUser(Guid userId)
+        [Route("{userId:int}")]
+        public IActionResult GetAllScoresByUser(int userId)
         {
             try
             {
@@ -53,8 +53,8 @@ namespace Mulligan.API.Controllers
         }
 
         [HttpGet]
-        [Route("{golfCourseId:Guid}")]
-        public IActionResult GetAllScoresByGolfCourseId(Guid golfCourseId)
+        [Route("{golfCourseId:int}")]
+        public IActionResult GetAllScoresByGolfCourseId(int golfCourseId)
         {
             try
             {
@@ -73,8 +73,8 @@ namespace Mulligan.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:Guid}")]
-        public IActionResult DeleteScore(Guid id)
+        [Route("{id:int}")]
+        public IActionResult DeleteScore(int id)
         {
             try
             {

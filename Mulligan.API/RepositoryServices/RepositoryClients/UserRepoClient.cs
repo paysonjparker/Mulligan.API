@@ -53,7 +53,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return users;
         }
 
-        public List<User> GetAllUsersByGolfCourse(Guid golfCourseId)
+        public List<User> GetAllUsersByGolfCourse(int golfCourseId)
         {
             var users = _dbContext.User.Where(user => user.GolfCourseId.Equals(golfCourseId)).ToList();
 
@@ -66,7 +66,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return users;
         }
 
-        public User GetUserById(Guid id)
+        public User GetUserById(int id)
         {
             var user = _dbContext.User.Find(id);
 
@@ -80,7 +80,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return null;
         }
 
-        public User UpdateUser(Guid id, UpdateUserRequest updateUserRequest)
+        public User UpdateUser(int id, UpdateUserRequest updateUserRequest)
         {
             var user = _dbContext.User.Find(id);
             var homeCourse = _dbContext.GolfCourse.Find(updateUserRequest.GolfCourseId);
@@ -100,7 +100,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return null;
         }
 
-        public bool DeleteUser(Guid id)
+        public bool DeleteUser(int id)
         {
             var user = _dbContext.User.Find(id);
 

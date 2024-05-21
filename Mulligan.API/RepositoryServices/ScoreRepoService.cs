@@ -19,17 +19,17 @@ namespace Mulligan.API.RepositoryServices
             return ConvertScore(_scoreRepoClient.AddScore(addScoreRequest));
         }
 
-        public IEnumerable<ScoreResponse> GetAllScoresByUser(Guid userId)
+        public IEnumerable<ScoreResponse> GetAllScoresByUser(int userId)
         {
             return ConvertScores(_scoreRepoClient.GetAllScoresByUser(userId));
         }
 
-        public IEnumerable<ScoreResponse> GetAllScoresByGolfCourse(Guid golfCourseId)
+        public IEnumerable<ScoreResponse> GetAllScoresByGolfCourse(int golfCourseId)
         {
             return ConvertScores(_scoreRepoClient.GetAllScoresByGolfCourse(golfCourseId));
         }
 
-        public bool DeleteScore(Guid scoreId)
+        public bool DeleteScore(int scoreId)
         {
             return _scoreRepoClient.DeleteScore(scoreId);
         }

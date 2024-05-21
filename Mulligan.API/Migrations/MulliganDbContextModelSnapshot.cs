@@ -24,9 +24,11 @@ namespace Mulligan.API.Migrations
 
             modelBuilder.Entity("Mulligan.API.Models.Domain.GolfCourse", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -62,9 +64,11 @@ namespace Mulligan.API.Migrations
 
             modelBuilder.Entity("Mulligan.API.Models.Domain.Post", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -73,21 +77,23 @@ namespace Mulligan.API.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Post");
                 });
 
             modelBuilder.Entity("Mulligan.API.Models.Domain.Score", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -95,29 +101,31 @@ namespace Mulligan.API.Migrations
                     b.Property<float>("Differential")
                         .HasColumnType("real");
 
-                    b.Property<Guid?>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("GolfCourseId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Total")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("GolfCourseId");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Score");
                 });
 
             modelBuilder.Entity("Mulligan.API.Models.Domain.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
@@ -127,8 +135,8 @@ namespace Mulligan.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("GolfCourseId")
+                        .HasColumnType("int");
 
                     b.Property<float>("HandicapIndex")
                         .HasColumnType("real");
@@ -146,7 +154,7 @@ namespace Mulligan.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("GolfCourseId");
 
                     b.ToTable("User");
                 });
@@ -155,7 +163,7 @@ namespace Mulligan.API.Migrations
                 {
                     b.HasOne("Mulligan.API.Models.Domain.User", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -166,11 +174,11 @@ namespace Mulligan.API.Migrations
                 {
                     b.HasOne("Mulligan.API.Models.Domain.GolfCourse", "GolfCourse")
                         .WithMany("Scores")
-                        .HasForeignKey("Id");
+                        .HasForeignKey("GolfCourseId");
 
                     b.HasOne("Mulligan.API.Models.Domain.User", "User")
                         .WithMany("Scores")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -183,7 +191,7 @@ namespace Mulligan.API.Migrations
                 {
                     b.HasOne("Mulligan.API.Models.Domain.GolfCourse", "GolfCourse")
                         .WithMany("Users")
-                        .HasForeignKey("Id");
+                        .HasForeignKey("GolfCourseId");
 
                     b.Navigation("GolfCourse");
                 });

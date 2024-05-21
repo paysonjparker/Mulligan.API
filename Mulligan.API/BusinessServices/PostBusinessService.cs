@@ -18,7 +18,7 @@ namespace Mulligan.API.BusinessServices
             return _postRepoService.AddPost(addPostRequest);
         }
 
-        public IEnumerable<PostResponse> GetAllPostsByUser(Guid userId)
+        public IEnumerable<PostResponse> GetAllPostsByUser(int userId)
         {
             return _postRepoService.GetAllPostsByUser(userId);
         }
@@ -28,7 +28,7 @@ namespace Mulligan.API.BusinessServices
             return _postRepoService.GetAllPosts();
         }
 
-        public bool DeletePost(Guid postId) 
+        public bool DeletePost(int postId) 
         {
             return _postRepoService.DeletePost(postId);
         }
