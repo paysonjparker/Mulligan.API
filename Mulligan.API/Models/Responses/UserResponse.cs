@@ -11,8 +11,8 @@ namespace Mulligan.API.Models.Responses
         public string EmailAddress { get; set; }
         public float HandicapIndex { get; set; }
         public string? HomeCourseName { get; set; }
-        public ICollection<Score>? Scores { get; set; }
-        public ICollection<Post>? Posts { get; set; }
+        public ICollection<ScoreResponse>? Scores { get; set; }
+        public ICollection<PostResponse>? Posts { get; set; }
         public int? GolfCourseId { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Mulligan.API.Models.Responses
         public int Par { get; set; }
         public int SlopeRating { get; set; }
         public float CourseRating { get; set; }
-        public ICollection<Score>? Scores { get; set; }
-        public ICollection<User>? Users { get; set; }
+        public ICollection<ScoreResponse>? Scores { get; set; }
+        public ICollection<UserResponse>? Users { get; set; }
     }
 }

@@ -53,9 +53,13 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
 
             foreach (var golfCourse in golfCourses)
             {
-                golfCourse.Scores = _dbContext.Score.Where(score => score.GolfCourseId.Equals(golfCourse.Id)).ToList();
-                golfCourse.Users = _dbContext.User.Where(user => user.GolfCourseId.Equals(golfCourse.Id)).ToList();
+                var scores = _dbContext.Score.Where(score => score.GolfCourseId.Equals(golfCourse.Id)).ToList();
+                var users = _dbContext.User.Where(user => user.GolfCourseId.Equals(golfCourse.Id)).ToList();
+
+                golfCourse.Scores = scores;
+                golfCourse.Users = users;
             }
+
 
             return golfCourses;
         }
