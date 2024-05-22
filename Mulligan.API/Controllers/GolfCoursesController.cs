@@ -6,6 +6,7 @@ using Mulligan.API.Models.Requests.GolfCourseRequests;
 
 namespace Mulligan.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("AllowAngularOrigins")]
@@ -33,7 +34,6 @@ namespace Mulligan.API.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet]
         public IActionResult GetAllGolfCourses()
         {
@@ -53,7 +53,6 @@ namespace Mulligan.API.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet]
         [Route("{id:int}")]
         public IActionResult GetGolfCourseById(int id)
@@ -74,7 +73,6 @@ namespace Mulligan.API.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet]
         [Route("names")]
         public IActionResult GetAllGolfCourseNames()
@@ -101,7 +99,6 @@ namespace Mulligan.API.Controllers
             }
         }
 
-        [Authorize]
         [HttpDelete]
         [Route("{id:int}")]
         public IActionResult DeleteGolfCourse(int id)
@@ -122,7 +119,6 @@ namespace Mulligan.API.Controllers
             }
         }
 
-        [Authorize]
         [HttpPut]
         [Route("{id:int}")]
         public IActionResult UpdateGolfCourse(int id, UpdateGolfCourseRequest updateGolfCourseRequest)
