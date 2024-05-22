@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Mulligan.API.Authorization;
 using Mulligan.API.BusinessServices;
 using Mulligan.API.Models.Requests.ScoreRequests;
 
@@ -17,6 +18,7 @@ namespace Mulligan.API.Controllers
             _scoreBusinessService = scoreBusinessService;
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult AddScore(AddScoreRequest addScoreRequest)
         {
@@ -32,6 +34,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{userId:int}")]
         public IActionResult GetAllScoresByUser(int userId)
@@ -52,6 +55,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{golfCourseId:int}")]
         public IActionResult GetAllScoresByGolfCourseId(int golfCourseId)
@@ -72,6 +76,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("{id:int}")]
         public IActionResult DeleteScore(int id)

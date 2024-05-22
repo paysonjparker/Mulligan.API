@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Mulligan.API.Authorization;
 using Mulligan.API.BusinessServices;
 using Mulligan.API.Models.Requests.PostRequests;
 
@@ -17,6 +18,7 @@ namespace Mulligan.API.Controllers
             _postBusinessService = postBusinessService;
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult AddPost(AddPostRequest addPostRequest)
         {
@@ -32,6 +34,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{userId:int}")]
         public IActionResult GetAllPostsByUser(int userId)
@@ -52,6 +55,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetAllPosts()
         {
@@ -71,6 +75,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("{postId:int}")]
         public IActionResult DeletePost(int postId)

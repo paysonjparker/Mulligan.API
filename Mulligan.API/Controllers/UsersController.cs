@@ -27,6 +27,7 @@ namespace Mulligan.API.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetAllUsers()
         {
@@ -42,6 +43,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("golfCourse/{golfCourseId:int}")]
         public IActionResult GetAllUsersByGolfCourse(int golfCourseId)
@@ -58,6 +60,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{id:int}")]
         public IActionResult GetUserById(int id)
@@ -79,6 +82,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult AddUser(AddUserRequest addUserRequest)
         {
@@ -94,6 +98,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route("{id:int}")]
         public IActionResult UpdateUser(int id, UpdateUserRequest updateUserRequest)
@@ -114,6 +119,7 @@ namespace Mulligan.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("{id:int}")]
         public IActionResult DeleteUser(int id)
