@@ -6,8 +6,8 @@ using Mulligan.API.Models.Requests.ScoreRequests;
 
 namespace Mulligan.API.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
+    //[Authorize]
+    [Route("api/scores")]
     [ApiController]
     [EnableCors("AllowAngularOrigins")]
     public class ScoresController : ControllerBase
@@ -35,7 +35,7 @@ namespace Mulligan.API.Controllers
         }
 
         [HttpGet]
-        [Route("{userId:int}")]
+        [Route("user/{userId:int}")]
         public IActionResult GetAllScoresByUser(int userId)
         {
             try
@@ -55,7 +55,7 @@ namespace Mulligan.API.Controllers
         }
 
         [HttpGet]
-        [Route("{golfCourseId:int}")]
+        [Route("golfCourse/{golfCourseId:int}")]
         public IActionResult GetAllScoresByGolfCourseId(int golfCourseId)
         {
             try

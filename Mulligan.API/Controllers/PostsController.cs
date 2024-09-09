@@ -6,8 +6,8 @@ using Mulligan.API.Models.Requests.PostRequests;
 
 namespace Mulligan.API.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
+    //[Authorize]
+    [Route("api/posts")]
     [ApiController]
     [EnableCors("AllowAngularOrigins")]
     public class PostsController : ControllerBase
@@ -35,7 +35,7 @@ namespace Mulligan.API.Controllers
         }
 
         [HttpGet]
-        [Route("{userId:int}")]
+        [Route("user/{userId:int}")]
         public IActionResult GetAllPostsByUser(int userId)
         {
             try

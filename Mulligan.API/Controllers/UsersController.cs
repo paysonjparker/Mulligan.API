@@ -7,8 +7,8 @@ using Mulligan.API.Models.Requests.UserRequests;
 
 namespace Mulligan.API.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
+    //[Authorize]
+    [Route("api/users")]
     [ApiController]
     [EnableCors("AllowAngularOrigins")]
     public class UsersController : ControllerBase

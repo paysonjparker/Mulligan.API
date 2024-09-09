@@ -6,8 +6,8 @@ using Mulligan.API.Models.Requests.GolfCourseRequests;
 
 namespace Mulligan.API.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
+    //[Authorize]
+    [Route("api/golfCourses")]
     [ApiController]
     [EnableCors("AllowAngularOrigins")]
     public class GolfCoursesController : ControllerBase
