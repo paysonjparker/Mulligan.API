@@ -19,6 +19,11 @@ namespace Mulligan.API.RepositoryServices
             return ConvertScore(_scoreRepoClient.AddScore(addScoreRequest));
         }
 
+        public IEnumerable<ScoreResponse> GetAllScores()
+        {
+            return ConvertScores(_scoreRepoClient.GetAllScores());
+        }
+
         public IEnumerable<ScoreResponse> GetAllScoresByUser(int userId)
         {
             return ConvertScores(_scoreRepoClient.GetAllScoresByUser(userId));

@@ -19,6 +19,11 @@ namespace Mulligan.API.BusinessServices
             return _scoreRepoService.AddScore(addScoreRequest);
         }
 
+        public IEnumerable<ScoreResponse> GetAllScores()
+        {
+            return _scoreRepoService.GetAllScores();
+        }
+
         public IEnumerable<ScoreResponse> GetAllScoresByUser(int userId)
         {
             return _scoreRepoService.GetAllScoresByUser(userId);

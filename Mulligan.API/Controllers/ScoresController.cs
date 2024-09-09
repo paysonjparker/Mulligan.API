@@ -35,6 +35,25 @@ namespace Mulligan.API.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetAllScores()
+        {
+            try
+            {
+                var scores = _scoreBusinessService.GetAllScores();
+
+                if (scores == null)
+                {
+                    return NotFound();
+                }
+                return Ok(scores);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("user/{userId:int}")]
         public IActionResult GetAllScoresByUser(int userId)
         {

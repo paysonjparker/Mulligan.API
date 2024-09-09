@@ -39,6 +39,13 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return score;
         }
 
+        public List<Score> GetAllScores()
+        {
+            var scores = _dbContext.Score.ToList();
+
+            return scores;
+        }
+
         public List<Score> GetAllScoresByUser(int userId)
         {
             var scores = _dbContext.Score.ToList().Where(user => user.UserId.Equals(userId)).ToList();
