@@ -165,7 +165,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
                 users.AddRange(_dbContext.User.ToList().Where(user => user.EmailAddress != null && user.EmailAddress.Contains(searchUserRequest.EmailAddress, StringComparison.OrdinalIgnoreCase)).ToList());
             }
 
-            return users;
+            return users.Distinct().ToList();
         }
 
     }
