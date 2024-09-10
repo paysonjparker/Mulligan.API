@@ -12,6 +12,7 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
         public User GetUserById(int id);
         public User UpdateUser(int id, UpdateUserRequest updateUserRequest);
         public bool DeleteUser(int id);
+        public List<User> SearchUsers(SearchUserRequest searchUserRequest);
         public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest);
     }
 }

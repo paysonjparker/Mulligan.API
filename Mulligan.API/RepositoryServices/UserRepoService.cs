@@ -51,6 +51,11 @@ namespace Mulligan.API.RepositoryServices
             return _userRepoClient.DeleteUser(userId);
         }
 
+        public IEnumerable<UserResponse> SearchUsers(SearchUserRequest searchUserRequest)
+        {
+            return ConvertUsers(_userRepoClient.SearchUsers(searchUserRequest));
+        }
+
         private UserResponse ConvertUser(User userDomain)
         {
             if (userDomain == null)

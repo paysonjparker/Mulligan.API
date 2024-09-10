@@ -12,6 +12,7 @@ namespace Mulligan.API.BusinessServices
         public IEnumerable<UserResponse> GetAllUsersByGolfCourse(int golfCourseId);
         public UserResponse UpdateUser(int userId, UpdateUserRequest updateUserRequest);
         public bool DeleteScore(int userId);
+        public IEnumerable<UserResponse> SearchUsers(SearchUserRequest searchUserRequest);
         public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest);
     }
 }

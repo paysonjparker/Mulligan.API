@@ -136,5 +136,28 @@ namespace Mulligan.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("search")]
+        public IActionResult SearchUsers([FromQuery]string? username, [FromQuery]string? fullName, [FromQuery]string? emailAddress, [FromQuery]string? homeCourseName)
+        {
+            try
+            {
+                SearchUserRequest searchUserRequest = new SearchUserRequest()
+                {
+                    Username = username ?? "",
+                    FullName = fullName ?? "",
+                    EmailAddress = emailAddress ?? "",
+                    HomeCourseName = homeCourseName ?? ""
+                };
+                var users = _userBusinessService.SearchUsers(searchUserRequest);
+
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
