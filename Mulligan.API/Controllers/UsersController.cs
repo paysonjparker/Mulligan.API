@@ -139,18 +139,13 @@ namespace Mulligan.API.Controllers
 
         [HttpGet]
         [Route("search")]
-        public IActionResult SearchUsers([FromQuery]string? username, [FromQuery]string? fullName, [FromQuery]string? emailAddress, [FromQuery]string? homeCourseName)
+        public IActionResult SearchUsers([FromQuery]string? searchQuery)
         {
             try
             {
-                SearchUserRequest searchUserRequest = new SearchUserRequest()
-                {
-                    Username = username ?? "",
-                    FullName = fullName ?? "",
-                    EmailAddress = emailAddress ?? "",
-                    HomeCourseName = homeCourseName ?? ""
-                };
-                var users = _userBusinessService.SearchUsers(searchUserRequest);
+                var searchString = searchQuery ?? "";
+
+                var users = _userBusinessService.SearchUsers(searchString);
 
                 return Ok(users);
             }

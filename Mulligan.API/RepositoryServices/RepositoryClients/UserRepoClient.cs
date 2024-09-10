@@ -144,25 +144,17 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
             return false;
         }
 
-        public List<User> SearchUsers(SearchUserRequest searchUserRequest)
+        public List<User> SearchUsers(string? searchUserRequest)
         {
             var users = new List<User>();
 
-            if (!string.IsNullOrWhiteSpace(searchUserRequest.Username))
+            if (!string.IsNullOrWhiteSpace(searchUserRequest))
             {
-                users.AddRange(_dbContext.User.ToList().Where(user => user.Username != null && user.Username.Contains(searchUserRequest.Username, StringComparison.OrdinalIgnoreCase)).ToList());
+                users.AddRange(_dbContext.User.ToList().Where(user => user.Username != null && user.Username.Contains(searchUserRequest, StringComparison.OrdinalIgnoreCase)).ToList());
             }
-            if (!string.IsNullOrWhiteSpace(searchUserRequest.FullName))
+            if (!string.IsNullOrWhiteSpace(searchUserRequest))
             {
-                users.AddRange(_dbContext.User.ToList().Where(user => user.FullName != null && user.FullName.Contains(searchUserRequest.FullName, StringComparison.OrdinalIgnoreCase)).ToList());
-            }
-            if (!string.IsNullOrWhiteSpace(searchUserRequest.HomeCourseName))
-            {
-                users.AddRange(_dbContext.User.ToList().Where(user => user.HomeCourseName != null && user.HomeCourseName.Contains(searchUserRequest.HomeCourseName, StringComparison.OrdinalIgnoreCase)).ToList());
-            }
-            if (!string.IsNullOrWhiteSpace(searchUserRequest.EmailAddress))
-            {
-                users.AddRange(_dbContext.User.ToList().Where(user => user.EmailAddress != null && user.EmailAddress.Contains(searchUserRequest.EmailAddress, StringComparison.OrdinalIgnoreCase)).ToList());
+                users.AddRange(_dbContext.User.ToList().Where(user => user.FullName != null && user.FullName.Contains(searchUserRequest, StringComparison.OrdinalIgnoreCase)).ToList());
             }
 
             return users.Distinct().ToList();

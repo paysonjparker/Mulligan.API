@@ -43,7 +43,7 @@ namespace Mulligan.API.BusinessServices
             return _userRepoService.DeleteUser(userId);
         }
 
-        public IEnumerable<UserResponse> SearchUsers(SearchUserRequest searchUserRequest)
+        public IEnumerable<UserResponse> SearchUsers(string? searchUserRequest)
         {
             return _userRepoService.SearchUsers(searchUserRequest);
         }
