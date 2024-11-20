@@ -134,5 +134,23 @@ namespace Mulligan.API.Controllers
                 return BadRequest(ex.Message);
             }    
         }
+
+        [HttpGet]
+        [Route("search")]
+        public IActionResult SearchGolfCourses([FromQuery] string? searchQuery)
+        {
+            try
+            {
+                var searchString = searchQuery ?? "";
+
+                var golfCourses = _golfCourseBusinessService.SearchGolfCourses(searchString);
+
+                return Ok(golfCourses);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -39,6 +39,11 @@ namespace Mulligan.API.RepositoryServices
             return ConvertGolfCourse(_golfCourseRepoClient.UpdateGolfCourse(golfCourseId, golfCourseUpdateRequest));
         }
 
+        public IEnumerable<GolfCourseResponse> SearchGolfCourses(string? searchGolfCourseRequest)
+        {
+            return ConvertGolfCourseList(_golfCourseRepoClient.SearchGolfCourses(searchGolfCourseRequest));
+        }
+
         private GolfCourseResponse ConvertGolfCourse(GolfCourse golfCourseDomain)
         {
             if (golfCourseDomain == null)

@@ -10,5 +10,6 @@ namespace Mulligan.API.RepositoryServices
         public GolfCourseResponse GetGolfCourseById(int golfCourseId);
         public bool DeleteGolfCourse(int golfCourseId);
         public GolfCourseResponse UpdateGolfCourse(int golfCourseId, UpdateGolfCourseRequest golfCourseUpdateRequest);
+        public IEnumerable<GolfCourseResponse> SearchGolfCourses(string? searchGolfCourseRequest);
     }
 }

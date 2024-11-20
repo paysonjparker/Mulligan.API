@@ -37,5 +37,10 @@ namespace Mulligan.API.BusinessServices
         {
             return _golfCourseRepoService.UpdateGolfCourse(golfCourseId, golfCourseUpdateRequest);
         }
+
+        public IEnumerable<GolfCourseResponse> SearchGolfCourses(string? searchGolfCourseRequest)
+        {
+            return _golfCourseRepoService.SearchGolfCourses(searchGolfCourseRequest);
+        }
     }
 }

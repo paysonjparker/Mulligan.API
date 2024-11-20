@@ -126,5 +126,29 @@ namespace Mulligan.API.RepositoryServices.RepositoryClients
 
             return null;
         }
+
+        public List<GolfCourse> SearchGolfCourses(string? searchGolfCourseRequest)
+        {
+            var golfCourses = new List<GolfCourse>();
+
+            if (!string.IsNullOrWhiteSpace(searchGolfCourseRequest))
+            {
+                golfCourses.AddRange(_dbContext.GolfCourse.ToList().Where(golfCourse => golfCourse.Name != null && golfCourse.Name.Contains(searchGolfCourseRequest, StringComparison.OrdinalIgnoreCase)).ToList());
+            }
+            if (!string.IsNullOrWhiteSpace(searchGolfCourseRequest))
+            {
+                golfCourses.AddRange(_dbContext.GolfCourse.ToList().Where(golfCourse => golfCourse.City != null && golfCourse.City.Contains(searchGolfCourseRequest, StringComparison.OrdinalIgnoreCase)).ToList());
+            }
+            if (!string.IsNullOrWhiteSpace(searchGolfCourseRequest))
+            {
+                golfCourses.AddRange(_dbContext.GolfCourse.ToList().Where(golfCourse => golfCourse.Subdivision != null && golfCourse.Subdivision.Contains(searchGolfCourseRequest, StringComparison.OrdinalIgnoreCase)).ToList());
+            }
+            if (!string.IsNullOrWhiteSpace(searchGolfCourseRequest))
+            {
+                golfCourses.AddRange(_dbContext.GolfCourse.ToList().Where(golfCourse => golfCourse.Country != null && golfCourse.Country.Contains(searchGolfCourseRequest, StringComparison.OrdinalIgnoreCase)).ToList());
+            }
+
+            return golfCourses.Distinct().ToList();
+        }
     }
 }
